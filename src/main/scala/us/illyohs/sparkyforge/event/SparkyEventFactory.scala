@@ -5,11 +5,16 @@ import us.illyohs.sparkyforge.event.github._
 
 object SparkyEventFactory {
 
-  def branchCreatedEvent(actor: String, branchName: String, url: String) {
+  def branchCreatedEvent(actor: String,
+                         branchName:
+                         String,
+                         url: String) {
     SparkyForge.EVENT_BUS.post(new BranchCreatedEvent(actor, branchName, url))
   }
 
-  def branchDeletedEvent(actor: String, brancName: String, url: String) {
+  def branchDeletedEvent(actor: String,
+                         brancName: String,
+                         url: String) {
     SparkyForge.EVENT_BUS.post(new BranchDeletedEvent(actor, brancName, url))
   }
 
