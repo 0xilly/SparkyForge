@@ -25,7 +25,7 @@ object SparkyEventFactory {
                        name:String,
                        closer: String,
                        url: String) {
-    SparkyForge.EVENT_BUS.post(new IssueClosedEvent(actor, issueNumber, id, issueName, name, closer, url )
+    SparkyForge.EVENT_BUS.post(new IssueClosedEvent(actor, issueNumber, id, issueName, name, closer, url))
   }
 
   def issueCreatedEvent(actor: String,

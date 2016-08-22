@@ -28,5 +28,6 @@ class GitHooker(sig:String, evenType:String, payload:Array[Byte]) {
 
 
   def getPayload: Array[Byte] = payload
+  
 
 }

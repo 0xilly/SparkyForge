@@ -16,6 +16,8 @@ dependencies {
     compile 'com.jcabi:jcabi-github:0.23'
     compile 'ninja.leaping.configurate:configurate-hocon:3.1'
     compile 'com.google.code.gson:gson:1.7.2'
+    compile 'org.kohsuke:github-api:1.77'
+    
 
     compile 'org.scala-lang:scala-library:2.11.1'
 

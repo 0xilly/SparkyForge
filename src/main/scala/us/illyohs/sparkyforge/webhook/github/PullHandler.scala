@@ -1,20 +1,19 @@
 package us.illyohs.sparkyforge.webhook.github
 
-import com.google.gson.{Gson, GsonBuilder}
+import com.google.gson.JsonParser
+import com.google.gson.JsonObject
+
 
 
 class PullHandler(json:String) {
-
-  var gson: Gson = null
-
-  parseJson(getJson)
-
-  private def parseJson(json:String): Unit = {
-    gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create()
-
-
-  }
-
-  def getJson: String = json
-
+  
+  val parser = new JsonParser
+  val jObj   = parser.parse(json).getAsJsonObject
+  
+  val action = jObj.get("action").getAsString
+  val number = jObj.get("number").getAsInt
+  val pr     = jObj.get("pull_request")
+  
+  val sender = jObj.get("sender").getAsJsonObject.get("login").getAsString
+  val 
 }

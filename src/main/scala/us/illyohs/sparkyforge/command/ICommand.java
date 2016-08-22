@@ -4,12 +4,12 @@ import org.pircbotx.UserLevel;
 
 public interface ICommand
 {
-    void name();
+    String name();
 
-    void help();
+    String help();
 
-    void execute();
+    void execute(String... args);
 
-    UserLevel getLevel();
+    UserLevel getPermLevel();
 
 }
