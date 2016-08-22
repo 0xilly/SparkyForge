@@ -1,11 +1,31 @@
 package us.illyohs.sparkyforge.command
 
-import org.pircbotx.UserLevel
+import us.illyohs.sparkyforge.util.{CommandRegistry, MessageUtil}
 
-abstract class BaseCmd(cmdname:String, perm:UserLevel) 
+import org.kitteh.irc.client.library.element.{Channel, User}
+
+
+
+abstract class BaseCmd(cmdname:String)
   extends ICommand {
   
   override def name: String = this.cmdname
-  
-  override def getPermLevel: UserLevel = this.perm
+
+}
+
+object HelpCmd
+  extends BaseCmd("help") {
+
+  override def help(): String = "lists all the commands"
+
+  override def execute(user: User, channel: Channel, message: String, args:Array[String]): Unit = {
+
+    val commands = CommandRegistry.commandReg
+
+    for (i <- 0 to commands.size()) {
+      val cmd = commands.get(i)
+      MessageUtil.sendIrcMessageToUser(user, cmd.name + ": " + cmd.help)
+    }
+
+  }
 }

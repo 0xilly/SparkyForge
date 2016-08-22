@@ -1,9 +1,19 @@
 package us.illyohs.sparkyforge.util
 
-import java.util.HashMap
-import us.illyohs.sparkyforge.command.ICommand
+import java.util
+
+import us.illyohs.sparkyforge.command.{HelpCmd, ICommand}
 
 object CommandRegistry {
   
-  val commandReg:HashMap[String, ICommand] = new  HashMap[String, ICommand]
+  val commandReg:util.HashMap[String, ICommand] = new util.HashMap[String, ICommand]
+  val prefix = "~"
+
+  commandReg.put(HelpCmd.name, HelpCmd)
+
+  def commandDispatcher(cmdMessage:String): Unit = {
+    if (cmdMessage.startsWith(prefix +"help")) {
+
+    }
+  }
 }

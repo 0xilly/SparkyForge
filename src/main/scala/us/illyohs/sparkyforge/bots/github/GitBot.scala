@@ -4,21 +4,30 @@ import org.kohsuke.github.GitHub
 
 
 
-class GitBot(
-    username:String,
-    token:String,
-    repository:String) {
+class GitBot(username:String, token:String, repository:String) {
   
-  val hub = GitHub.connect(username, token)
+  private val hub = GitHub.connect(username, token)
 
-  val repo = hub.getRepository("")
-  
-  def defBranch: String = repo.getDefaultBranch
+
+  def getRepo = hub.getRepository(repository)
+
+  def getDefualtBranch = getRepo.getDefaultBranch
+
+  def getIssue(id:Int) = getRepo.getIssue(id)
+
+  def getPullRequest(id:Int) = getRepo.getPullRequest(id)
   
   def isPointedToDefualt(id:Int): Boolean = {
-    val pointed = repo.getPullRequest(id)
+    val defualt = getDefualtBranch
+
+    val pointed = getPullRequest(id).getHead.getRef
     
     true
   }
+
+  def checkMergeAblity(id:Int): Unit = {
+    getPullRequest(id)
+  }
+
 }
 

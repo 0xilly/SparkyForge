@@ -1,6 +1,9 @@
 package us.illyohs.sparkyforge.command;
 
-import org.pircbotx.UserLevel;
+
+
+import org.kitteh.irc.client.library.element.Channel;
+import org.kitteh.irc.client.library.element.User;
 
 public interface ICommand
 {
@@ -8,8 +11,6 @@ public interface ICommand
 
     String help();
 
-    void execute(String... args);
-
-    UserLevel getPermLevel();
+    void execute(User user, Channel channel, String message, String[] args);
 
 }

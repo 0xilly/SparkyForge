@@ -1,19 +1,34 @@
 package us.illyohs.sparkyforge.command.git
 
-import us.illyohs.sparkyforge.command.BaseCmd
-import org.pircbotx.UserLevel
+
 import us.illyohs.sparkyforge.SparkyForge
+import us.illyohs.sparkyforge.command.BaseCmd
+import us.illyohs.sparkyforge.util.MessageUtil
+
+import org.kitteh.irc.client.library.element.{Channel, User}
 
 class MergeStatus 
-  extends BaseCmd("mergestat", null) {
+  extends BaseCmd("mergestat") {
   
   override def help: String = "merge stat <pr number>"
   
-  override def execute(args:String*): Unit = {
-    val mergeId = args.indexOf(0).toInt
-//    SparkyForge.irc.bot.send().m
+
+  def getPRstatus(id:Int): Boolean = SparkyForge.github.getPullRequest(id).isMerged
+
+  override def execute(user:User, channel:Channel, message:String, args:Array[String]): Unit = {
+    val id = args.apply(0).toInt
+    val prTile = SparkyForge.github.getPullRequest(id).getTitle
+    val pr = SparkyForge.github.getPullRequest(id)
+
+    val isMerged = SparkyForge.github.getPullRequest(id)
+
+    if (getPRstatus(id)) {
+      MessageUtil.sendIrcMessageToChannel(channel, user.getNick + ", Pull Request: "+ prTile +" has been merged by " +
+        pr.getMergedBy)
+    } else {
+      MessageUtil.sendIrcMessageToChannel(channel, user.getNick + ": Pull Request: "+ prTile + " has not been merged")
+    }
+
+    MessageUtil.sendIrcMessageToChannel(channel, "")
   }
-  
-  def getPRstatus(id:Int): Boolean = SparkyForge.git.repo.getPullRequest(id).isMerged()
-  
 }
