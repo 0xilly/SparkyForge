@@ -24,7 +24,7 @@ object MessageUtil {
     * @param channel
     * @param message
     */
-  def sendIrcMessageToChannel(channel:Channel, message:String): Unit = channel.sendMessage(lexHelper(message))
+  def sendIrcMessageToChannel(message:String): Unit = SparkyForge.irc.getChannel.sendMessage(message)
 
   /**
     * Send a message to the channel
@@ -38,13 +38,13 @@ object MessageUtil {
     * @param id
     * @param comment
     */
-  def sendIssueMessage(id:Int, comment:String): Unit = SparkyForge.github.getIssue(id).comment(comment)
+  def sendIssueMessage(id:Int, comment:String): Unit = SparkyForge.github.getPullRequest(id).comment(comment)
 
   /**
     * send a Pull Request comment
     * @param id
     * @param comment
     */
-  def sendPullRequest(id:Int, comment:String): Unit = SparkyForge.github.getPullRequest(id).comment(comment)
+  def sendPullRequestMessage(id:Int, comment:String): Unit = SparkyForge.github.getPullRequest(id).comment(comment)
 
 }
