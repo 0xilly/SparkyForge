@@ -9,7 +9,7 @@ import org.kohsuke.github.GitHub
 
 class GitBot(login:String, token:String, repository:String) {
   
-  private val github = GitHub.connect(login, token)
+  private val github = GitHub.connectUsingOAuth(token)
 
   def getRepository = github.getRepository(repository)
 
@@ -18,6 +18,8 @@ class GitBot(login:String, token:String, repository:String) {
   def getPullRequest(iD:Int) = getRepository.getPullRequest(iD)
 
   def getPullRequestTitle(id:Int) = getPullRequest(id).getTitle
+
+  def getPrMaker(id:Int) = getPullRequest(id).getUser
 
   def getState(id:Int) = getPullRequest(id).getState
 
@@ -65,9 +67,12 @@ class GitBot(login:String, token:String, repository:String) {
       MessageUtil.sendPullRequestMessage(id, PullMessage)
 
       MessageUtil.sendIrcMessageToChannel(IrcMessage)
+
     } else if (!haveIMadeAComment(id) && getPullRequest(id).getMergeable) {
       val IrcMessage = GREEN + author +"'s "+ RESET +"pull request:"+ GREEN + title + RESET + "is" + BOLD + GREEN +
         "Mergeable " + RESET + "and ready to be reviewed!"
+
+      MessageUtil.sendIrcMessageToChannel(IrcMessage)
     }
   }
 

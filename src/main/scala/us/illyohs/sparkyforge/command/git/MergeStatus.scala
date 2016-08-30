@@ -23,12 +23,12 @@ class MergeStatus
     val isMerged = SparkyForge.github.getPullRequest(id)
 
     if (getPRstatus(id)) {
-      MessageUtil.sendIrcMessageToChannel(channel, user.getNick + ", Pull Request: "+ prTile +" has been merged by " +
+      MessageUtil.sendIrcMessageToChannel(user.getNick + ", Pull Request: "+ prTile +" has been merged by " +
         pr.getMergedBy)
     } else {
-      MessageUtil.sendIrcMessageToChannel(channel, user.getNick + ": Pull Request: "+ prTile + " has not been merged")
+      MessageUtil.sendIrcMessageToChannel(user.getNick + ": Pull Request: "+ prTile + " has not been merged")
     }
 
-    MessageUtil.sendIrcMessageToChannel(channel, "")
+    MessageUtil.sendIrcMessageToChannel("")
   }
 }

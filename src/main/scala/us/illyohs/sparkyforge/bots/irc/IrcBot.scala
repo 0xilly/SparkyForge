@@ -5,17 +5,18 @@ import org.kitteh.irc.client.library.element.User
 import org.kitteh.irc.client.library.event.channel.ChannelMessageEvent
 import org.kitteh.irc.lib.net.engio.mbassy.listener.Handler
 
-class IrcBot(server:String, port:Int, name:String, password:String, channel:String, commandOpperator:Char) {
+class IrcBot(network:String, port:Int, name:String, password:String, channel:String, commandOperator:String) {
 
   var client: Client = null
 
   def connect: Unit = {
     client = Client.builder()
-      .serverHost(server)
+      .serverHost(network)
       .serverPort(port)
       .nick(name)
       .name(name)
       .user(name)
+      .secure(false)
       .build()
 
 

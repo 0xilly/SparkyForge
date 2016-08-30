@@ -6,34 +6,28 @@ import us.illyohs.sparkyforge.bots.irc.IrcBot
 import us.illyohs.sparkyforge.util.ConfigUtil
 import us.illyohs.sparkyforge.webhook.SparkyServer
 
-import com.google.common.eventbus.EventBus
-
 
 object SparkyForge {
 
-  ConfigUtil.init()
-
-  var EVENT_BUS: EventBus = new EventBus
   private var server: SparkyServer = _
-  var github  = new GitBot(
-    ConfigUtil.getConf.getUsername,
-    ConfigUtil.getConf.getToken,
-    ConfigUtil.getConf.getRepository)
 
-  var irc     = new IrcBot(
-    ConfigUtil.getConf.getNetwork,
-    ConfigUtil.getConf.getPort,
-    ConfigUtil.getConf.getNick,
-    ConfigUtil.getConf.getPassword,
-    ConfigUtil.getConf.getChannel,
-    ConfigUtil.getConf.getCommandOpperator)
-  var sparkyPort = ConfigUtil.getConf.getWebHookPort
+  var github = new GitBot(
+    ConfigUtil.getGitHubLogin,
+    ConfigUtil.getGitHubToken,
+    ConfigUtil.getGitHubRepo)
+
+  var irc = new IrcBot(
+    ConfigUtil.getIrcNetwork,
+    ConfigUtil.getIrcPort,
+    ConfigUtil.getIrcNick,
+    ConfigUtil.getIrcPass,
+    ConfigUtil.getIrcChannel,
+    ConfigUtil.getIrcCMD)
 
   def main(args: Array[String]) {
-
-            SparkyForge
-    server = new SparkyServer(sparkyPort)
-//    irc.connect
+    server = new SparkyServer(ConfigUtil.getWebHookPort)
+    irc.connect
 
   }
 }
+

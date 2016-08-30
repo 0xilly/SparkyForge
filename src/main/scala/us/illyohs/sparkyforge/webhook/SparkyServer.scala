@@ -13,7 +13,7 @@ object SparkyServer {
         val sig = request.headers("X-Hub-Signature")
         val eventType = request.headers("X-GitHub-GitEvent")
         val data:Array[Byte] = ByteStreams.toByteArray(request.raw().getInputStream)
-
+        println()
         new GitHooker(sig, eventType, data)
 
       }
@@ -21,7 +21,7 @@ object SparkyServer {
   }
 }
 
-class SparkyServer(val port: Int) {
+class SparkyServer(port: Int) {
   Spark.port(port)
   Spark.init()
   SparkyServer.Github()

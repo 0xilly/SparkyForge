@@ -21,4 +21,4 @@ out
 /classes/
 
 
-*.cfg
+/sparky.properties
