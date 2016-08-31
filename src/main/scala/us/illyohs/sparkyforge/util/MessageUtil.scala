@@ -2,7 +2,7 @@ package us.illyohs.sparkyforge.util
 
 import us.illyohs.sparkyforge.SparkyForge
 
-import org.kitteh.irc.client.library.element.{Channel, User}
+import org.kitteh.irc.client.library.element.User
 
 object MessageUtil {
 
@@ -21,24 +21,16 @@ object MessageUtil {
 
   /**
     * Send a message to channel
-    * @param channel
     * @param message
     */
-  def sendIrcMessageToChannel(message:String): Unit = SparkyForge.irc.getChannel.sendMessage(message)
+  def sendIrcMessageToChannel(message:String): Unit = SparkyForge.irc.getChannel.sendMessage(lexHelper(message))
 
   /**
-    * Send a message to the channel
+    * Send a message to the User
     * @param user
     * @param message
     */
   def sendIrcMessageToUser(user:User, message:String): Unit = user.sendMessage(message)
-
-  /**
-    * send Issue comment
-    * @param id
-    * @param comment
-    */
-  def sendIssueMessage(id:Int, comment:String): Unit = SparkyForge.github.getPullRequest(id).comment(comment)
 
   /**
     * send a Pull Request comment

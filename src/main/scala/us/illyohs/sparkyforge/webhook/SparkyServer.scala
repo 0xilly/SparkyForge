@@ -10,10 +10,9 @@ object SparkyServer {
   def Github() {
     Spark.post("/github", new Route {
       override def handle(request: Request, response: Response) = {
-        val sig = request.headers("X-Hub-Signature")
-        val eventType = request.headers("X-GitHub-GitEvent")
-        val data:Array[Byte] = ByteStreams.toByteArray(request.raw().getInputStream)
-        println()
+        val sig               = request.headers("X-Hub-Signature")
+        val eventType         = request.headers("X-GitHub-GitEvent")
+        val data:Array[Byte]  = ByteStreams.toByteArray(request.raw().getInputStream)
         new GitHooker(sig, eventType, data)
 
       }

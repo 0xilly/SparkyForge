@@ -22,7 +22,7 @@ object ConfigUtil {
         props.setProperty("IRC.Nick", "Sparky")
         props.setProperty("IRC.Password", "12345")
         props.setProperty("IRC.Channel", "#channel")
-        props.setProperty("IRC.CommendOperator", "~")
+//        props.setProperty("IRC.CommendOperator", "~")
 
         props.setProperty("WebHook.Port", "2222")
 
@@ -34,16 +34,9 @@ object ConfigUtil {
         case fileio: FileNotFoundException => fileio.printStackTrace()
         case io: IOException => io.printStackTrace()
       }
-      println("")
+      println("please restart the bot after I exit")
       sys.exit()
     }
-  }
-
-  def getGitHubLogin: String = {
-    writeProperties
-    val in = Files.newInputStream(conf)
-    props.load(in)
-    props.getProperty("GitHub.Login")
   }
 
   def getGitHubToken: String = {
@@ -95,12 +88,12 @@ object ConfigUtil {
     props.getProperty("IRC.Channel")
   }
 
-  def getIrcCMD: String = {
-    writeProperties
-    val in = Files.newInputStream(conf)
-    props.load(in)
-    props.getProperty("IRC.CommendOperator")
-  }
+//  def getIrcCMD: String = {
+//    writeProperties
+//    val in = Files.newInputStream(conf)
+//    props.load(in)
+//    props.getProperty("IRC.CommendOperator")
+//  }
 
   def getWebHookPort: Int = {
     writeProperties

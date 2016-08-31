@@ -6,13 +6,11 @@ import us.illyohs.sparkyforge.bots.irc.IrcBot
 import us.illyohs.sparkyforge.util.ConfigUtil
 import us.illyohs.sparkyforge.webhook.SparkyServer
 
-
 object SparkyForge {
 
   private var server: SparkyServer = _
 
   var github = new GitBot(
-    ConfigUtil.getGitHubLogin,
     ConfigUtil.getGitHubToken,
     ConfigUtil.getGitHubRepo)
 
@@ -21,12 +19,12 @@ object SparkyForge {
     ConfigUtil.getIrcPort,
     ConfigUtil.getIrcNick,
     ConfigUtil.getIrcPass,
-    ConfigUtil.getIrcChannel,
-    ConfigUtil.getIrcCMD)
+    ConfigUtil.getIrcChannel)
 
   def main(args: Array[String]) {
     server = new SparkyServer(ConfigUtil.getWebHookPort)
     irc.connect
+    println("connected")
 
   }
 }
