@@ -43,21 +43,21 @@ public class GitHubPullActionHelper
     private void handleOpen(int id)
     {
         try {
-            GHPullRequest pr = SparkyForge.getGitbot().getPullRequest(id);
-            String defualtBranch = SparkyForge.getGitbot().getDefualtBranch();
+            GHPullRequest pr           = SparkyForge.getGitbot().getPullRequest(id);
+            String defualtBranch       = SparkyForge.getGitbot().getDefualtBranch();
             boolean isPointedToDefault = SparkyForge.getGitbot().isPointedToDefualt(id);
             GHUser user = pr.getUser();
             URL url = pr.getHtmlUrl();
 
-            String gitComment = "@" + user.getLogin() + " Your PR is not pointed to the default branch __" +
+            String gitComment = "@" + user.getLogin() + " Your pull request is not pointed to the default branch __" +
                     defualtBranch + "__. Please retarget to __" + defualtBranch + "__. if you want this to be mered!";
 
-            String ircNonMerge = user.getName() + "(" + user.getLogin() + ") has just open pull request"+ pr.getTitle()
-                    +" that is NOT pointed to the current default branch " + defualtBranch +
+            String ircNonMerge = user.getName() + "(" + user.getLogin() + ") has just open pull request: "+ pr.getTitle()
+                    +", that is NOT pointed to the current default branch " + defualtBranch +
                     " and WON'T BE merged! " + url;
 
-            String ircCanMerge = user.getName() + "(" + user.getLogin() + ") has just open pull request "
-                    + pr.getTitle() + " that is  pointed to the current default branch " + defualtBranch +
+            String ircCanMerge = user.getName() + "(" + user.getLogin() + ") has just open pull request: "
+                    + pr.getTitle() + ", that is  pointed to the current default branch " + defualtBranch +
                     " and CAN BE merged! " + url;
 
 
@@ -85,10 +85,10 @@ public class GitHubPullActionHelper
         try
         {
             GHPullRequest pr = SparkyForge.getGitbot().getPullRequest(id);
-            String tile = pr.getTitle();
-            URL url = pr.getHtmlUrl();
+            String title     = pr.getTitle();
+            URL url          = pr.getHtmlUrl();
 
-            String message = "Pull Request " + tile + " has been reopened! " + url;
+            String message = "Pull Request: " + title + ", has been reopened! " + url;
             MessageUtils.sendLexHandledMessageToChannel(message);
         } catch (IOException e)
         {
@@ -98,21 +98,10 @@ public class GitHubPullActionHelper
 
     private void handleSync(int id)
     {
+
         try {
-            GHPullRequest pr = SparkyForge.getGitbot().getPullRequest(id);
-            String defualtBranch = SparkyForge.getGitbot().getDefualtBranch();
+
             boolean isPointedToDefault = SparkyForge.getGitbot().isPointedToDefualt(id);
-            boolean haveIMadeAComment = SparkyForge.getGitbot().haveIMadeAComment(id);
-            GHUser user = pr.getUser();
-
-
-            String gitComment = "@" + user.getLogin() + " Your PR is not pointed to the default branch __" +
-                    defualtBranch + "__. Please retarget to __" + defualtBranch + "__. if you want this to be mered!";
-
-            if (!haveIMadeAComment)
-            {
-                 MessageUtils.sendPullRequestMessage(id, gitComment);
-            }
 
             SparkyForge.getGitbot().setStatus(id, isPointedToDefault);
 
@@ -126,19 +115,14 @@ public class GitHubPullActionHelper
     {
         try {
             GHPullRequest pr = SparkyForge.getGitbot().getPullRequest(id);
-            String title = pr.getTitle();
-            URL url = pr.getHtmlUrl();
-            MessageUtils.sendLexHandledMessageToChannel("Pull Request " + title + " has been Closed! " + url);
+            String title     = pr.getTitle();
+            URL url          = pr.getHtmlUrl();
+            MessageUtils.sendLexHandledMessageToChannel("Pull Request: " + title + ", has been Closed! " + url);
 
         } catch (IOException e)
         {
             e.printStackTrace();
         }
     }
-
-
-
-
-
 
 }
