@@ -89,7 +89,7 @@ public class GitHubPullActionHelper
             URL url = pr.getHtmlUrl();
 
             String message = "Pull Request " + tile + " has been reopened! " + url;
-                    MessageUtils.sendLexHandledMessageToChannel(message);
+            MessageUtils.sendLexHandledMessageToChannel(message);
         } catch (IOException e)
         {
             e.printStackTrace();
