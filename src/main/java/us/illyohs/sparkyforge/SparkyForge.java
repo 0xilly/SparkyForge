@@ -5,8 +5,6 @@ import us.illyohs.sparkyforge.bots.irc.IrcBot;
 import us.illyohs.sparkyforge.hooker.HookLoader;
 import us.illyohs.sparkyforge.util.ConfigUtil;
 
-import org.kitteh.irc.client.library.element.Channel;
-
 public class SparkyForge
 {
     private static GitHubBot gitbot;
