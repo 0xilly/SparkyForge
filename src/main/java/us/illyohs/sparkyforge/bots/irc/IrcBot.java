@@ -1,13 +1,13 @@
 package us.illyohs.sparkyforge.bots.irc;
 
+import us.illyohs.sparkyforge.handler.CommandHandler;
+
 import org.kitteh.irc.client.library.Client;
 import org.kitteh.irc.client.library.element.Channel;
 
 public class IrcBot
 {
     String channel;
-    int    port;
-
     Client client;
 
     public IrcBot(String network, int port, String name, String password, String channel)
@@ -23,10 +23,12 @@ public class IrcBot
                 .secure(false)
                 .build();
 
+
     }
 
     public void connect()
     {
+        client.getEventManager().registerEventListener(new CommandHandler());
         client.addChannel(getChannel());
     }
 

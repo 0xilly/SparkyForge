@@ -1,11 +1,14 @@
-package us.illyohs.sparkyforge.bots.github;
+package us.illyohs.sparkyforge.util;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collection;
 import java.util.Objects;
 
+import org.kohsuke.github.GHIssue;
 import org.kohsuke.github.GHIssueComment;
 import org.kohsuke.github.GHIssueState;
+import org.kohsuke.github.GHLabel;
 import org.kohsuke.github.GHPullRequest;
 import org.kohsuke.github.GHPullRequestCommitDetail;
 import org.kohsuke.github.GHRepository;
@@ -15,12 +18,12 @@ import org.kohsuke.github.GitHub;
 import static org.kohsuke.github.GHCommitState.*;
 
 
-public class GitHubBot
+public class GitHubHelper
 {
     String repo;
     GitHub gitHub;
 
-    public GitHubBot(String token, String repo)
+    public GitHubHelper(String token, String repo)
     {
         this.repo = repo;
         try
@@ -99,5 +102,16 @@ public class GitHubBot
                 getRepo().createCommitStatus(sha1, SUCCESS, "", "Is pointed to the default branch");
             }
         }
+    }
+
+
+    public GHIssue getIssue(int id) throws IOException
+    {
+        return getRepo().getIssue(id);
+    }
+
+    public Collection<GHLabel> gitLabels(int id) throws IOException
+    {
+        return getIssue(id).getLabels();
     }
 }

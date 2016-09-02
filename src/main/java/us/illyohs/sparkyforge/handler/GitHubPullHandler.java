@@ -1,19 +1,20 @@
-package us.illyohs.sparkyforge.util;
+package us.illyohs.sparkyforge.handler;
 
 import java.io.IOException;
 import java.net.URL;
 
 import us.illyohs.sparkyforge.SparkyForge;
+import us.illyohs.sparkyforge.util.MessageUtils;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.kohsuke.github.GHPullRequest;
 import org.kohsuke.github.GHUser;
 
-public class GitHubPullActionHelper
+public class GitHubPullHandler
 {
 
-    public GitHubPullActionHelper(String json)
+    public GitHubPullHandler(String json)
     {
         JsonParser parser = new JsonParser();
         JsonObject jObj   = parser.parse(json).getAsJsonObject();

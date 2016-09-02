@@ -2,7 +2,7 @@ package us.illyohs.sparkyforge.hooker.hooks;
 
 import java.io.IOException;
 
-import us.illyohs.sparkyforge.util.GitHubPullActionHelper;
+import us.illyohs.sparkyforge.handler.GitHubPullHandler;
 
 
 import com.google.common.io.ByteStreams;
@@ -23,7 +23,7 @@ public class GitHubHooker extends Hooker
         String event   = request.headers("X-GitHub-GitEvent");
         byte[] payload = ByteStreams.toByteArray(request.raw().getInputStream());
         String json    = new String(payload);
-        return new GitHubPullActionHelper(json);
+        return new GitHubPullHandler(json);
     }
 
 }

@@ -7,7 +7,7 @@ import us.illyohs.sparkyforge.hooker.hooks.GitHubHooker;
 import us.illyohs.sparkyforge.hooker.hooks.Hooker;
 import us.illyohs.sparkyforge.util.ConfigUtil;
 
-import spark.Spark;
+import static spark.Spark.*;
 
 
 public class HookLoader
@@ -21,13 +21,10 @@ public class HookLoader
 
     public void loadHooks()
     {
-        Spark.port(ConfigUtil.getWebHookPort());
-        System.out.println();
-        Spark.init();
+        port(ConfigUtil.getWebHookPort());
+        init();
 
-        for (Hooker hook: hookList)
-        {
-            Spark.post("/"+ hook.getName() , hook::init);
-        }
+        hookList.forEach(hooker -> post("/" + hooker.getName(), hooker::init));
     }
+
 }

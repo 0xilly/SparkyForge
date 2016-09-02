@@ -23,7 +23,8 @@ repositories {
 }
 
 dependencies {
-    compile "com.sparkjava:spark-core:2.5"//Spark framework for receiving events
+    compile 'com.sparkjava:spark-core:2.5'//Spark framework for receiving events
+//    compile 'org.pircbotx:pircbotx:2.1'
     compile 'org.kitteh.irc:client-lib:2.1.0'//Irc Library
     compile 'com.google.code.gson:gson:1.7.2'
     compile 'com.google.guava:guava:19.0'

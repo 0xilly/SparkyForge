@@ -34,7 +34,7 @@ public class ConfigUtil
                 props.setProperty("IRC.Nick", "Sparky");
                 props.setProperty("IRC.Password", "12345");
                 props.setProperty("IRC.Channel", "#channel");
-//        props.setProperty("IRC.CommendOperator", "~")
+                props.setProperty("IRC.CommendOperator", "~");
 
                 props.setProperty("WebHook.Port", "2222");
                 out = Files.newOutputStream(conf);
@@ -91,6 +91,11 @@ public class ConfigUtil
     public static String getIrcChannel()
     {
         return getPropFromKey("IRC.Channel");
+    }
+
+    public static String getIrcCommendOperator()
+    {
+        return getPropFromKey("IRC.CommendOperator");
     }
 
     public static int getIrcPort()

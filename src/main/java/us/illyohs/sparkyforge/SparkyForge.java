@@ -1,15 +1,17 @@
 package us.illyohs.sparkyforge;
 
-import us.illyohs.sparkyforge.bots.github.GitHubBot;
 import us.illyohs.sparkyforge.bots.irc.IrcBot;
 import us.illyohs.sparkyforge.hooker.HookLoader;
 import us.illyohs.sparkyforge.util.ConfigUtil;
+import us.illyohs.sparkyforge.util.GitHubHelper;
 
 public class SparkyForge
 {
-    private static GitHubBot gitbot;
-    private static IrcBot ircbot;
+    private static GitHubHelper gitbot;
+    private static IrcBot       ircbot;
     private static HookLoader loader = new HookLoader();
+
+
 
     public static void main(String... args)
     {
@@ -23,7 +25,6 @@ public class SparkyForge
 
         ircbot.connect();
 
-        loader.loadHooks();
     }
 
     public static IrcBot getIrcbot()
@@ -31,8 +32,8 @@ public class SparkyForge
         return ircbot;
     }
 
-    public static GitHubBot getGitbot()
+    public static GitHubHelper getGitbot()
     {
-        return new GitHubBot(ConfigUtil.getGHToken(), ConfigUtil.getGHRepo());
+        return new GitHubHelper(ConfigUtil.getGHToken(), ConfigUtil.getGHRepo());
     }
 }

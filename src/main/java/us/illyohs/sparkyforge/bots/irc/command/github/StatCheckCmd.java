@@ -5,9 +5,9 @@ import us.illyohs.sparkyforge.bots.irc.command.BaseCMD;
 import org.kitteh.irc.client.library.element.Channel;
 import org.kitteh.irc.client.library.element.User;
 
-public class StatCheckCMD extends BaseCMD
+public class StatCheckCmd extends BaseCMD
 {
-    public StatCheckCMD(String name)
+    public StatCheckCmd(String name)
     {
         super(name);
     }
@@ -19,8 +19,12 @@ public class StatCheckCMD extends BaseCMD
     }
 
     @Override
-    public void execute(Channel channel, User user, String... args)
+    public boolean execute(Channel channel, User user, String... args)
     {
+        if (isVoice(channel, user) || isOp(channel, user))
+        {
 
+        }
+        return true;
     }
 }

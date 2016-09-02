@@ -18,9 +18,12 @@ public class IsPRMergedCmd extends BaseCMD
         return "usage <PR id>";
     }
 
+
+
     @Override
-    public void execute(Channel channel, User user, String... args)
+    public boolean execute(Channel channel, User user, String... args)
     {
-//        channel.g
+
+        return true;
     }
 }
