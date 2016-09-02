@@ -25,7 +25,7 @@ public abstract class BaseCMD
 
     abstract public String getHelp();
 
-    abstract public boolean execute(Channel channel, User user, String... args) throws IOException;
+    abstract public boolean execute(Channel channel, User user, String... args) throws IOException, ArrayIndexOutOfBoundsException;
 
     protected boolean isOp(Channel channel, User user)
     {

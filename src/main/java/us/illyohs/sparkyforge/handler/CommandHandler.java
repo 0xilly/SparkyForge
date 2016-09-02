@@ -44,7 +44,13 @@ public class CommandHandler
         String message = event.getMessage();
         if (message.startsWith(cmdOper))
         {
-            return cmdReg.get(getFirstWord(message)).execute(event.getChannel(), event.getActor(), getArgs(message));
+            try {
+                return cmdReg.get(getFirstWord(message)).execute(event.getChannel(), event.getActor(), getArgs(message));
+
+            } catch (ArrayIndexOutOfBoundsException e)
+            {
+                event.getChannel().sendMessage("Command error with arg");
+            }
         }
         return false;
     }

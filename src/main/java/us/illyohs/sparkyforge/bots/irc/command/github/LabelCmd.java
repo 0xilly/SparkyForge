@@ -1,6 +1,7 @@
 package us.illyohs.sparkyforge.bots.irc.command.github;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -49,14 +50,15 @@ public class LabelCmd extends BaseCMD
     @Override
     public boolean execute(Channel channel, User user, String... args)
     {
-        String first  = args[1];
-        String second = args[2];
-        int    id     = Integer.parseInt(second);
 
         ArrayList<String> ar = new ArrayList<>();
 
         try
         {
+            String first  = args[1];
+            String second = args[2];
+            int    id     = Integer.parseInt(second);
+
             Collection<GHLabel> labels = SparkyForge.getGitbot().gitLabels(id);
 
             if (args[1].equals("ls"))
@@ -76,7 +78,8 @@ public class LabelCmd extends BaseCMD
 
         } catch (IOException e)
         {
-           e.printStackTrace();
+
+//           e.printStackTrace();
         }
 
         return true;
