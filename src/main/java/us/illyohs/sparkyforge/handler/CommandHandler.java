@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import us.illyohs.sparkyforge.bots.irc.command.BaseCMD;
+import us.illyohs.sparkyforge.bots.irc.command.github.IsPRMergedCmd;
 import us.illyohs.sparkyforge.bots.irc.command.github.LabelCmd;
 import us.illyohs.sparkyforge.util.ConfigUtil;
 
@@ -14,12 +15,15 @@ public class CommandHandler
 {
 
     private HashMap<String, BaseCMD> cmdReg = new HashMap<String, BaseCMD>();
-    private BaseCMD baseCMD = new LabelCmd();
     private String cmdOper  = ConfigUtil.getIrcCommendOperator();
+
+    private BaseCMD labelCmd = new LabelCmd();
+    private BaseCMD ismerged = new IsPRMergedCmd();
 
     public CommandHandler()
     {
-        cmdReg.put(baseCMD.getName(), baseCMD);
+        cmdReg.put(labelCmd.getName(), labelCmd);
+        cmdReg.put(ismerged.getName(), ismerged);
     }
 
 
@@ -30,14 +34,14 @@ public class CommandHandler
 
     private String[] getArgs(String message)
     {
-        return message.replace(getFirstWord(message), "").split(" ");
+        String mes = message.replace(getFirstWord(message), "");
+        return mes.replace(cmdOper, "").split(" ");
     }
 
     @Handler
     public boolean messageEvent(ChannelMessageEvent event) throws IOException
     {
         String message = event.getMessage();
-        String striped = getFirstWord(message);
         if (message.startsWith(cmdOper))
         {
             return cmdReg.get(getFirstWord(message)).execute(event.getChannel(), event.getActor(), getArgs(message));
