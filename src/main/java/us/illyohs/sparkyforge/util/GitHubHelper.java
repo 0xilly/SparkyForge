@@ -2,8 +2,11 @@ package us.illyohs.sparkyforge.util;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
+
+import us.illyohs.sparkyforge.SparkyForge;
 
 import org.kohsuke.github.GHIssue;
 import org.kohsuke.github.GHIssueComment;
@@ -40,7 +43,7 @@ public class GitHubHelper
         return gitHub.getRepository(repo);
     }
 
-    public String getDefualtBranch() throws IOException
+    public String getDefaultBranch() throws IOException
     {
         return getRepo().getDefaultBranch();
     }
@@ -77,7 +80,7 @@ public class GitHubHelper
 
     public boolean isPointedToDefualt(int id) throws IOException
     {
-        return Objects.equals(getDefualtBranch(), getPullRequest(id).getBase().getRef());
+        return Objects.equals(getDefaultBranch(), getPullRequest(id).getBase().getRef());
     }
 
     public boolean haveIMadeAComment(int id) throws IOException
@@ -98,7 +101,8 @@ public class GitHubHelper
             String sha1 = i.getSha();
             if (!isGood) {
                 getRepo().createCommitStatus(sha1, FAILURE, "", "Is not pointed to the default branch");
-            } else {
+            }
+            else {
                 getRepo().createCommitStatus(sha1, SUCCESS, "", "Is pointed to the default branch");
             }
         }
@@ -110,8 +114,78 @@ public class GitHubHelper
         return getRepo().getIssue(id);
     }
 
-    public Collection<GHLabel> gitLabels(int id) throws IOException
+    public Collection<GHLabel> getLabels(int id) throws IOException
     {
         return getIssue(id).getLabels();
     }
+
+    public boolean doesLabelExist(int id, String label) throws IOException
+    {
+        for (GHLabel lbs: getRepo().listLabels())
+        {
+            if (Objects.equals(lbs.getName(), label))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public GHLabel getLabelFromName(String name) throws IOException
+    {
+        return getRepo().getLabel(name);
+    }
+
+
+    public void addLabel(int id, String label) throws IOException
+    {
+        ArrayList<String> lableArray = new ArrayList<>();
+
+        Collection<GHLabel> lbz = getLabels(id);
+
+        lbz.forEach(lab -> lableArray.add(lab.getName()));
+
+        for (GHLabel lbs: getRepo().listLabels())
+        {
+            if (Objects.equals(lbs.getName(), label))
+            {
+                getIssue(id).setLabels(lableArray.toArray(new String[lableArray.size()]));
+            }
+        }
+
+    }
+
+
+    public void removeLabel(int id, String label) throws IOException
+    {
+        for (GHLabel lbs: getLabels(id))
+        {
+            if (Objects.equals(lbs.getName(), label)) {
+                getLabels(id).remove(lbs);
+            }
+        }
+    }
+
+    public boolean isIssueClosed(int id) throws IOException
+    {
+        GHIssueState state = getIssue(id).getState();
+        if (state == GHIssueState.CLOSED)
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
+
+    public void closeIssue(int id) throws IOException
+    {
+        getIssue(id).close();
+    }
+
+    public void reopenIssue(int id) throws IOException
+    {
+        getIssue(id).reopen();
+    }
+
 }

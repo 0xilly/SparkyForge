@@ -1,6 +1,8 @@
 package us.illyohs.sparkyforge.bots.irc.command;
 
+import javax.annotation.Nullable;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
 import java.util.SortedSet;
@@ -25,7 +27,7 @@ public abstract class BaseCMD
 
     abstract public String getHelp();
 
-    abstract public boolean execute(Channel channel, User user, String... args) throws IOException, ArrayIndexOutOfBoundsException;
+    abstract public boolean execute(Channel channel, User user, @Nullable String... args) throws IOException, ArrayIndexOutOfBoundsException;
 
     protected boolean isOp(Channel channel, User user)
     {
@@ -55,4 +57,18 @@ public abstract class BaseCMD
         return false;
     }
 
+    public String args2String(int start, String... args)
+    {
+        String newString = "";
+        for (int i = start; i < args.length; i++)
+        {
+            newString += args[i] + " ";
+        }
+        return newString.trim();
+    }
+
+    public int string2int(String str)
+    {
+        return Integer.parseInt(str);
+    }
 }

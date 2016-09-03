@@ -8,9 +8,9 @@ import us.illyohs.sparkyforge.bots.irc.command.BaseCMD;
 import org.kitteh.irc.client.library.element.Channel;
 import org.kitteh.irc.client.library.element.User;
 
-public class IsPRMergedCmd extends BaseCMD
+public class IsMergedCmd extends BaseCMD
 {
-    public IsPRMergedCmd()
+    public IsMergedCmd()
     {
         super("ismerged");
     }
@@ -26,7 +26,7 @@ public class IsPRMergedCmd extends BaseCMD
     @Override
     public boolean execute(Channel channel, User user, String... args)
     {
-        int id = Integer.parseInt(args[1]);
+        int id = string2int(args[1]); //Integer.parseInt(args[1]);
 
         try
         {
@@ -38,7 +38,6 @@ public class IsPRMergedCmd extends BaseCMD
                 channel.sendMessage(user.getNick() + ": The Pr is not merged");
             }
         } catch (IOException e) {
-            System.out.println("That Is an issue not a PR");
             channel.sendMessage( user.getNick() + ": That is an issue not a pr... YOU FOOL!");
         }
         return true;

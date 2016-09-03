@@ -14,7 +14,7 @@ public class LabelTest
     static ArrayList<String> ar = new ArrayList<>();
     public static void main(String... args) throws IOException
     {
-        Collection<GHLabel> labels = SparkyForge.getGitbot().gitLabels(2);
+        Collection<GHLabel> labels = SparkyForge.getGitbot().getLabels(2);
 
         labels.forEach(lab -> ar.add(lab.getName()));
 

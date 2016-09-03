@@ -45,7 +45,7 @@ public class GitHubPullHandler
     {
         try {
             GHPullRequest pr           = SparkyForge.getGitbot().getPullRequest(id);
-            String defualtBranch       = SparkyForge.getGitbot().getDefualtBranch();
+            String defualtBranch       = SparkyForge.getGitbot().getDefaultBranch();
             boolean isPointedToDefault = SparkyForge.getGitbot().isPointedToDefualt(id);
             GHUser user = pr.getUser();
             URL url = pr.getHtmlUrl();
@@ -66,14 +66,13 @@ public class GitHubPullHandler
             {
                 SparkyForge.getGitbot().setStatus(id, false);
                 MessageUtils.sendMessageToChannel(ircNonMerge);
-                MessageUtils.sendPullRequestMessage(id, gitComment);
+                MessageUtils.sendIssueMessage(id, gitComment);
 
             } else
             {
                 SparkyForge.getGitbot().setStatus(id, true);
                 MessageUtils.sendLexHandledMessageToChannel(ircCanMerge);
             }
-
             SparkyForge.getGitbot().setStatus(id, isPointedToDefault);
         } catch (IOException e)
         {
@@ -85,9 +84,9 @@ public class GitHubPullHandler
     {
         try
         {
-            GHPullRequest pr = SparkyForge.getGitbot().getPullRequest(id);
-            String title     = pr.getTitle();
-            URL url          = pr.getHtmlUrl();
+            GHPullRequest pr    = SparkyForge.getGitbot().getPullRequest(id);
+            String        title = pr.getTitle();
+            URL           url   = pr.getHtmlUrl();
 
             String message = "Pull Request: " + title + ", has been reopened! " + url;
             MessageUtils.sendLexHandledMessageToChannel(message);
@@ -115,9 +114,9 @@ public class GitHubPullHandler
     private void handleClosed(int id)
     {
         try {
-            GHPullRequest pr = SparkyForge.getGitbot().getPullRequest(id);
-            String title     = pr.getTitle();
-            URL url          = pr.getHtmlUrl();
+            GHPullRequest pr    = SparkyForge.getGitbot().getPullRequest(id);
+            String        title = pr.getTitle();
+            URL           url   = pr.getHtmlUrl();
             MessageUtils.sendLexHandledMessageToChannel("Pull Request: " + title + ", has been Closed! " + url);
 
         } catch (IOException e)

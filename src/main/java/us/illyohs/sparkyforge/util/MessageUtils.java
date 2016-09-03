@@ -46,14 +46,25 @@ public class MessageUtils
         user.sendMessage(message);
     }
 
-    public static void sendPullRequestMessage(int id, String comment)
+    public static void sendIssueMessage(int id, String comment)
     {
         try
         {
-            SparkyForge.getGitbot().getPullRequest(id).comment(comment);
+            SparkyForge.getGitbot().getIssue(id).comment(comment);
         } catch (IOException e)
         {
             e.printStackTrace();
         }
     }
+
+//    public static void sendIssueMessage(int id, String comment)
+//    {
+//        try
+//        {
+//            SparkyForge.getGitbot().getIssue(id).comment(comment);
+//        } catch (IOException e)
+//        {
+//            e.printStackTrace();
+//        }
+//    }
 }
