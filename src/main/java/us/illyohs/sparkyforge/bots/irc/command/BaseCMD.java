@@ -6,17 +6,14 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.SortedSet;
 
-import us.illyohs.sparkyforge.SparkyForge;
 import us.illyohs.sparkyforge.util.ConfigUtil;
 import us.illyohs.sparkyforge.util.WebUtils;
 
 import com.google.gson.JsonObject;
 
 import com.google.gson.JsonParser;
-import org.kitteh.irc.client.library.command.WhoisCommand;
 import org.kitteh.irc.client.library.element.Channel;
 import org.kitteh.irc.client.library.element.User;
-import org.kitteh.irc.client.library.element.WhoisData;
 import org.kitteh.irc.client.library.element.mode.ChannelUserMode;
 
 public abstract class BaseCMD
@@ -86,7 +83,7 @@ public abstract class BaseCMD
         try
         {
             JsonParser parser = new JsonParser();
-            JsonObject jObj   = WebUtils.readJObjFromURL(ConfigUtil.getPermsURL());
+            JsonObject jObj   = WebUtils.readJsonObjectFromURL(ConfigUtil.getPermsURL());
             if (jObj.has(ircAcc)) {
                 return true;
             }
@@ -104,7 +101,7 @@ public abstract class BaseCMD
         try
         {
             JsonParser parser = new JsonParser();
-            JsonObject jObj   = WebUtils.readJObjFromURL(ConfigUtil.getPermsURL());
+            JsonObject jObj   = WebUtils.readJsonObjectFromURL(ConfigUtil.getPermsURL());
             if (jObj.has(ircAcc)) {
                 return jObj.get(ircAcc).getAsString();
             }
@@ -119,12 +116,6 @@ public abstract class BaseCMD
 
     private String getAcc(User user)
     {
-
-        Optional<String> acc = user.getAccount();
-        if (acc.isPresent())
-        {
-
-        }
         return user.getAccount().get();
     }
 }

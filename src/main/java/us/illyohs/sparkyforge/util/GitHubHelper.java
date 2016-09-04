@@ -120,7 +120,7 @@ public class GitHubHelper
         return getIssue(id).getLabels();
     }
 
-    public boolean doesLabelExist(int id, String label) throws IOException
+    public boolean doesLabelExist(String label) throws IOException
     {
         List<String> labList = new ArrayList<>();
         this.getRepo().listLabels().forEach(l -> labList.add(l.getName()));

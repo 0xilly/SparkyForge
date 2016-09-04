@@ -1,6 +1,7 @@
 package us.illyohs.sparkyforge.hooker.hooks.jenkins;
 
 import us.illyohs.sparkyforge.util.MessageUtils;
+import us.illyohs.sparkyforge.util.WebUtils;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -9,9 +10,8 @@ public class JenkinsDispatcher
 {
     public JenkinsDispatcher(String json)
     {
-        JsonParser parser = new JsonParser();
-        JsonObject jObj   = parser.parse(json).getAsJsonObject();
-        JsonObject build  = parser.parse("build").getAsJsonObject();
+        JsonObject jObj   = WebUtils.readJsonObjectFromString(json);
+        JsonObject build  = jObj.get("build").getAsJsonObject();
 
         String     name   = jObj.get("name").getAsString();
         int        number = build.get("number").getAsInt();

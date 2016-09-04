@@ -30,7 +30,7 @@ public class LatestCmd extends BaseCMD
         String file = "http://files.minecraftforge.net/";
         try {
 
-            JsonObject jObj = WebUtils.readJObjFromURL("http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json");
+            JsonObject jObj = WebUtils.readJsonObjectFromURL("http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json");
 
             JsonObject promos = jObj.get("promos").getAsJsonObject();
             String     latest = promos.get("latest").getAsString();

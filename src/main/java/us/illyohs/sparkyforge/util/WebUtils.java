@@ -19,11 +19,15 @@ public class WebUtils
         return IOUtils.toString(in);
     }
 
-    public static JsonObject readJObjFromURL(String url) throws IOException
+    public static JsonObject readJsonObjectFromString(String json)
     {
-//        JsonReader jreader = new JsonReader(p).setLenient(true);
         JsonParser parser = new JsonParser();
-        return parser.parse(readFromURL(url)).getAsJsonObject();
+        return parser.parse(json).getAsJsonObject();
+    }
+
+    public static JsonObject readJsonObjectFromURL(String url) throws IOException
+    {
+        return readJsonObjectFromString(readFromURL(url));
     }
 
 }

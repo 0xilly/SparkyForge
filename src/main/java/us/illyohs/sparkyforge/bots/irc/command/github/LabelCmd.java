@@ -39,7 +39,7 @@ public class LabelCmd extends BaseCMD
             int    id     = string2int(args[1]);
 
             Collection<GHLabel> labels = SparkyForge.getGitbot().getLabels(id);
-            boolean doesExist = SparkyForge.getGitbot().doesLabelExist(id, args[3]);
+            boolean doesExist = SparkyForge.getGitbot().doesLabelExist(args[3]);
 
             if (args[2].equals("ls"))
             {

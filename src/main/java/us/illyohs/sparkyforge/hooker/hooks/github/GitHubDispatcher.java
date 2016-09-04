@@ -6,6 +6,7 @@ import java.net.URL;
 import us.illyohs.sparkyforge.SparkyForge;
 import us.illyohs.sparkyforge.util.MessageUtils;
 import us.illyohs.sparkyforge.util.Shorteners;
+import us.illyohs.sparkyforge.util.WebUtils;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -17,8 +18,7 @@ public class GitHubDispatcher
 
     public GitHubDispatcher(String json)
     {
-        JsonParser parser = new JsonParser();
-        JsonObject jObj   = parser.parse(json).getAsJsonObject();
+        JsonObject jObj   = WebUtils.readJsonObjectFromString(json);
 
         String action     = jObj.get("action").getAsString();
         int    id         = jObj.get("number").getAsInt();

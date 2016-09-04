@@ -44,7 +44,7 @@ public class CommandHandler
         cmdReg.put(close.getName(), close);
         cmdReg.put(reopen.getName(), reopen);
         cmdReg.put(latest.getName(), latest);
-        cmdReg.put(statCheck.getName(), status);
+        cmdReg.put(status.getName(), status);
     }
 
     private String getFirstWord(String message)
