@@ -28,5 +28,6 @@ dependencies {
     compile 'org.kitteh.irc:client-lib:2.1.0'//Irc Library
     compile 'com.google.code.gson:gson:1.7.2'
     compile 'com.google.guava:guava:19.0'
+    compile 'com.github.kevinsawicki:http-request:6.0'
     compile 'org.kohsuke:github-api:1.77'//GitHub Api
 }

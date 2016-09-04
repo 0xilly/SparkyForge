@@ -28,6 +28,7 @@ public class ConfigUtil
                 System.out.println(conf.getFileName() + " Has not been found now creating a new one");
                 props.setProperty("GitHub.Token", "token");
                 props.setProperty("GitHub.Repository", "repo");
+                props.setProperty("GitHub.PermsJsonUrl", "www.foo.com/Perms.json");
 
                 props.setProperty("IRC.Network", "irc.esper.net");
                 props.setProperty("IRC.Port", "6666");
@@ -50,7 +51,7 @@ public class ConfigUtil
         }
     }
 
-    public static String getPropFromKey(String key)
+    private static String getPropFromKey(String key)
     {
         try
         {
@@ -98,6 +99,11 @@ public class ConfigUtil
         return getPropFromKey("IRC.CommendOperator");
     }
 
+    public static String getPermsURL()
+    {
+        return getPropFromKey("GitHub.PermsJsonUrl");
+    }
+
     public static int getIrcPort()
     {
         return Integer.parseInt(getPropFromKey("IRC.Port"));
@@ -107,4 +113,5 @@ public class ConfigUtil
     {
         return Integer.parseInt(getPropFromKey("WebHook.Port"));
     }
+
 }

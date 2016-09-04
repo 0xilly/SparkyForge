@@ -1,29 +1,25 @@
-package us.illyohs.sparkyforge.hooker.hooks;
+package us.illyohs.sparkyforge.hooker.hooks.jenkins;
 
 import java.io.IOException;
 
-import us.illyohs.sparkyforge.handler.GitHubPullHandler;
-
+import us.illyohs.sparkyforge.hooker.hooks.Hooker;
 
 import com.google.common.io.ByteStreams;
 import spark.Request;
 import spark.Response;
 
-public class GitHubHooker extends Hooker
+public class JenkinsHooker extends Hooker
 {
-    public GitHubHooker()
+    public JenkinsHooker()
     {
-        super("github");
+        super("jenkins");
     }
 
     @Override
     public Object init(Request request, Response response) throws IOException
     {
-        String sig     = request.headers("X-Hub-Signature");
-        String event   = request.headers("X-GitHub-GitEvent");
         byte[] payload = ByteStreams.toByteArray(request.raw().getInputStream());
         String json    = new String(payload);
-        return new GitHubPullHandler(json);
+        return null;
     }
-
 }

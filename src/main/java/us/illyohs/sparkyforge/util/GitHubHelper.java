@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 import us.illyohs.sparkyforge.SparkyForge;
@@ -121,14 +122,12 @@ public class GitHubHelper
 
     public boolean doesLabelExist(int id, String label) throws IOException
     {
-        for (GHLabel lbs: getRepo().listLabels())
-        {
-            if (Objects.equals(lbs.getName(), label))
-            {
-                return true;
-            }
-        }
-        return false;
+        List<String> labList = new ArrayList<>();
+        this.getRepo().listLabels().forEach(l -> labList.add(l.getName()));
+//        String[] lbz = new String[0];
+//        lbz = labList.toArray(lbz);
+
+        return labList.contains(label);
     }
 
     public GHLabel getLabelFromName(String name) throws IOException
@@ -137,33 +136,15 @@ public class GitHubHelper
     }
 
 
-    public void addLabel(int id, String label) throws IOException
-    {
-        ArrayList<String> lableArray = new ArrayList<>();
-
-        Collection<GHLabel> lbz = getLabels(id);
-
-        lbz.forEach(lab -> lableArray.add(lab.getName()));
-
-        for (GHLabel lbs: getRepo().listLabels())
-        {
-            if (Objects.equals(lbs.getName(), label))
-            {
-                getIssue(id).setLabels(lableArray.toArray(new String[lableArray.size()]));
-            }
-        }
-
-    }
-
-
     public void removeLabel(int id, String label) throws IOException
     {
         for (GHLabel lbs: getLabels(id))
         {
-            if (Objects.equals(lbs.getName(), label)) {
+            if (lbs.getName() == label) {
                 getLabels(id).remove(lbs);
             }
         }
+
     }
 
     public boolean isIssueClosed(int id) throws IOException

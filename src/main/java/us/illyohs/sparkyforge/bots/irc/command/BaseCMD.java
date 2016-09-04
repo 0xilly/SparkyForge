@@ -2,13 +2,21 @@ package us.illyohs.sparkyforge.bots.irc.command;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
 import java.util.SortedSet;
 
+import us.illyohs.sparkyforge.SparkyForge;
+import us.illyohs.sparkyforge.util.ConfigUtil;
+import us.illyohs.sparkyforge.util.WebUtils;
+
+import com.google.gson.JsonObject;
+
+import com.google.gson.JsonParser;
+import org.kitteh.irc.client.library.command.WhoisCommand;
 import org.kitteh.irc.client.library.element.Channel;
 import org.kitteh.irc.client.library.element.User;
+import org.kitteh.irc.client.library.element.WhoisData;
 import org.kitteh.irc.client.library.element.mode.ChannelUserMode;
 
 public abstract class BaseCMD
@@ -57,7 +65,7 @@ public abstract class BaseCMD
         return false;
     }
 
-    public String args2String(int start, String... args)
+    protected String args2String(int start, String... args)
     {
         String newString = "";
         for (int i = start; i < args.length; i++)
@@ -67,8 +75,56 @@ public abstract class BaseCMD
         return newString.trim();
     }
 
-    public int string2int(String str)
+    protected int string2int(String str)
     {
         return Integer.parseInt(str);
+    }
+
+    protected boolean doesUserHaveGitPerms(User user, Channel channe)
+    {
+        String ircAcc = user.getUserString();
+        try
+        {
+            JsonParser parser = new JsonParser();
+            JsonObject jObj   = WebUtils.readJObjFromURL(ConfigUtil.getPermsURL());
+            if (jObj.has(ircAcc)) {
+                return true;
+            }
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    protected String getGitHubUserName(User user)
+    {
+        String ircAcc = user.getName();
+        try
+        {
+            JsonParser parser = new JsonParser();
+            JsonObject jObj   = WebUtils.readJObjFromURL(ConfigUtil.getPermsURL());
+            if (jObj.has(ircAcc)) {
+                return jObj.get(ircAcc).getAsString();
+            }
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    private String getAcc(User user)
+    {
+
+        Optional<String> acc = user.getAccount();
+        if (acc.isPresent())
+        {
+
+        }
+        return user.getAccount().get();
     }
 }

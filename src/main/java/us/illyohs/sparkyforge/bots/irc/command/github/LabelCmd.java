@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import us.illyohs.sparkyforge.SparkyForge;
 import us.illyohs.sparkyforge.bots.irc.command.BaseCMD;
@@ -30,16 +31,17 @@ public class LabelCmd extends BaseCMD
     @Override
     public boolean execute(Channel channel, User user, String... args)
     {
-        ArrayList<String> ar = new ArrayList<>();
+        List<String> ar = new ArrayList<>();
 
         try
         {
 
-            int    id     = string2int(args[2]);
+            int    id     = string2int(args[1]);
 
             Collection<GHLabel> labels = SparkyForge.getGitbot().getLabels(id);
+            boolean doesExist = SparkyForge.getGitbot().doesLabelExist(id, args[3]);
 
-            if (args[1].equals("ls"))
+            if (args[2].equals("ls"))
             {
                 labels.forEach(lab -> ar.add(lab.getName()));
 
@@ -52,24 +54,43 @@ public class LabelCmd extends BaseCMD
                     channel.sendMessage(user.getNick() + ": There are no labels for this issue/pr");
                 }
 
-            } else if (args[1].equals("add"))
+            } else if (args[2].equals("add"))
             {
-//                if (!doesLabelexsit(id,args2String(3, args)))
-//                {
-//                    SparkyForge.getGitbot().addLabel(id, args2String(3, args));
-////                    System.out.println(args2String(3, args));
-//                }
-//
-//                if (!SparkyForge.getGitbot().doesLabelExist(id, args2String(3, args)))
-//                {
-//                    SparkyForge.getGitbot().addLabel(id, args2String(3, args));
-//                }
+                labels.forEach(lab -> ar.add(lab.getName()));
+
+                if (doesExist)
+                {
+                    String[] lbz    = new String[0];
+                    String addlabel = SparkyForge.getGitbot().getLabelFromName(args[3]).getName();
+                    ar.add(addlabel);
+
+                    lbz = ar.toArray(lbz);
+                    SparkyForge.getGitbot().getPullRequest(id).setLabels(lbz);
+                } else
+                {
+                    channel.sendMessage(user.getNick() + " The label:" + args[3] + ", does not exist!");
+                }
+
+            } else if (args[2].equals("rm"))
+            {
+                labels.forEach(lab -> ar.add(lab.getName()));
+                if (doesExist)
+                {
+                    String[] lbz    = new String[0];
+                    String rmlabel = SparkyForge.getGitbot().getLabelFromName(args[3]).getName();
+                    ar.remove(rmlabel);
+
+                    lbz = ar.toArray(lbz);
+                    SparkyForge.getGitbot().getPullRequest(id).setLabels(lbz);
+                } else
+                {
+                    channel.sendMessage(user.getNick() + ", The label: " + args[3] + ", does not exist!");
+                }
             }
 
         } catch (IOException e)
         {
-
-//           e.printStackTrace();
+            e.printStackTrace();
         }
 
         return true;

@@ -1,20 +1,21 @@
-package us.illyohs.sparkyforge.handler;
+package us.illyohs.sparkyforge.hooker.hooks.github;
 
 import java.io.IOException;
 import java.net.URL;
 
 import us.illyohs.sparkyforge.SparkyForge;
 import us.illyohs.sparkyforge.util.MessageUtils;
+import us.illyohs.sparkyforge.util.Shorteners;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.kohsuke.github.GHPullRequest;
 import org.kohsuke.github.GHUser;
 
-public class GitHubPullHandler
+public class GitHubDispatcher
 {
 
-    public GitHubPullHandler(String json)
+    public GitHubDispatcher(String json)
     {
         JsonParser parser = new JsonParser();
         JsonObject jObj   = parser.parse(json).getAsJsonObject();
@@ -45,21 +46,21 @@ public class GitHubPullHandler
     {
         try {
             GHPullRequest pr           = SparkyForge.getGitbot().getPullRequest(id);
-            String defualtBranch       = SparkyForge.getGitbot().getDefaultBranch();
+            String defaultBranch       = SparkyForge.getGitbot().getDefaultBranch();
             boolean isPointedToDefault = SparkyForge.getGitbot().isPointedToDefualt(id);
             GHUser user = pr.getUser();
             URL url = pr.getHtmlUrl();
 
             String gitComment = "@" + user.getLogin() + " Your pull request is not pointed to the default branch __" +
-                    defualtBranch + "__. Please retarget to __" + defualtBranch + "__. if you want this to be mered!";
+                    defaultBranch + "__. Please retarget to __" + defaultBranch + "__. if you want this to be mered!";
 
             String ircNonMerge = user.getName() + "(" + user.getLogin() + ") has just open pull request: "+ pr.getTitle()
-                    +", that is NOT pointed to the current default branch " + defualtBranch +
-                    " and WON'T BE merged! " + url;
+                    +", that is NOT pointed to the current default branch " + defaultBranch +
+                    " and WON'T BE merged! " + Shorteners.gitIo(url);
 
             String ircCanMerge = user.getName() + "(" + user.getLogin() + ") has just open pull request: "
-                    + pr.getTitle() + ", that is  pointed to the current default branch " + defualtBranch +
-                    " and CAN BE merged! " + url;
+                    + pr.getTitle() + ", that is  pointed to the current default branch " + defaultBranch +
+                    " and CAN BE merged! " + Shorteners.gitIo(url);
 
 
             if (!isPointedToDefault)
@@ -88,7 +89,7 @@ public class GitHubPullHandler
             String        title = pr.getTitle();
             URL           url   = pr.getHtmlUrl();
 
-            String message = "Pull Request: " + title + ", has been reopened! " + url;
+            String message = "Pull Request: " + title + ", has been reopened! " + Shorteners.gitIo(url);
             MessageUtils.sendLexHandledMessageToChannel(message);
         } catch (IOException e)
         {
@@ -117,7 +118,7 @@ public class GitHubPullHandler
             GHPullRequest pr    = SparkyForge.getGitbot().getPullRequest(id);
             String        title = pr.getTitle();
             URL           url   = pr.getHtmlUrl();
-            MessageUtils.sendLexHandledMessageToChannel("Pull Request: " + title + ", has been Closed! " + url);
+            MessageUtils.sendLexHandledMessageToChannel("Pull Request: " + title + ", has been Closed! " + Shorteners.gitIo(url));
 
         } catch (IOException e)
         {

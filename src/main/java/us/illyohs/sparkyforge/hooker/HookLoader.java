@@ -3,7 +3,7 @@ package us.illyohs.sparkyforge.hooker;
 import java.util.ArrayList;
 import java.util.List;
 
-import us.illyohs.sparkyforge.hooker.hooks.GitHubHooker;
+import us.illyohs.sparkyforge.hooker.hooks.github.GitHubHooker;
 import us.illyohs.sparkyforge.hooker.hooks.Hooker;
 import us.illyohs.sparkyforge.util.ConfigUtil;
 

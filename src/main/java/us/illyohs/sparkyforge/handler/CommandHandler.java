@@ -10,6 +10,8 @@ import us.illyohs.sparkyforge.bots.irc.command.github.IsMergedCmd;
 import us.illyohs.sparkyforge.bots.irc.command.github.LabelCmd;
 import us.illyohs.sparkyforge.bots.irc.command.github.ReopenCmd;
 import us.illyohs.sparkyforge.bots.irc.command.github.StatCheckCmd;
+import us.illyohs.sparkyforge.bots.irc.command.mcis.LatestCmd;
+import us.illyohs.sparkyforge.bots.irc.command.mcis.StatusCmd;
 import us.illyohs.sparkyforge.util.ConfigUtil;
 
 import org.kitteh.irc.client.library.event.channel.ChannelMessageEvent;
@@ -21,12 +23,17 @@ public class CommandHandler
     private HashMap<String, BaseCMD> cmdReg = new HashMap<String, BaseCMD>();
     private String cmdOper  = ConfigUtil.getIrcCommendOperator();
 
+    //GitHub
     private BaseCMD label       = new LabelCmd();
     private BaseCMD ismerged    = new IsMergedCmd();
     private BaseCMD defualt     = new DefaultBranchCmd();
     private BaseCMD statCheck   = new StatCheckCmd();
     private BaseCMD close       = new CloseCmd();
     private BaseCMD reopen      = new ReopenCmd();
+
+    //Mcis
+    private BaseCMD latest      = new LatestCmd();
+    private BaseCMD status      = new StatusCmd();
 
     public CommandHandler()
     {
@@ -36,6 +43,8 @@ public class CommandHandler
         cmdReg.put(statCheck.getName(), statCheck);
         cmdReg.put(close.getName(), close);
         cmdReg.put(reopen.getName(), reopen);
+        cmdReg.put(latest.getName(), latest);
+        cmdReg.put(statCheck.getName(), status);
     }
 
     private String getFirstWord(String message)
@@ -58,7 +67,7 @@ public class CommandHandler
             try {
                 if (cmdReg.containsKey(getFirstWord(message)))
                 {
-                    return cmdReg.get(getFirstWord(message)).execute(event.getChannel(), event.getActor(), getArgs(message));
+                    return cmdReg.get(getFirstWord(message).toLowerCase()).execute(event.getChannel(), event.getActor(), getArgs(message.toLowerCase()));
                 }
 
             } catch (ArrayIndexOutOfBoundsException e)
