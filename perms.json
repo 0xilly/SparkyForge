@@ -2,5 +2,9 @@
   "LordIllyohs": {
     "irc":"LordIllyohs",
     "github": "Illyohs"
+  },
+  "FooUser": {
+    "irc": "FooIrcUser",
+    "github": "FooGitHubUser"
   }
 }
