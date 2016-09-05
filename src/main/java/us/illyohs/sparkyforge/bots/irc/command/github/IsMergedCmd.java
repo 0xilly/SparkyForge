@@ -39,6 +39,9 @@ public class IsMergedCmd extends BaseCMD
             }
         } catch (IOException e) {
             channel.sendMessage( user.getNick() + ": That is an issue not a pr... YOU FOOL!");
+        } catch (NumberFormatException e)
+        {
+
         }
         return true;
     }

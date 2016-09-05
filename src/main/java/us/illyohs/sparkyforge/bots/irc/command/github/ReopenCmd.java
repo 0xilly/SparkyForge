@@ -23,24 +23,33 @@ public class ReopenCmd extends BaseCMD
         return "Reopens a Issue/PR, Usage: reopen <id>";
     }
 
-    //FIXME add premchecks
     @Override
     public boolean execute(Channel channel, User user, String... args)
     {
         int id = string2int(args[1]); // Integer.parseInt(args[1]);
         try
         {
-            boolean isClosed = SparkyForge.getGitbot().isIssueClosed(id);
-            channel.sendMessage(String.valueOf(isClosed));
-            if (isClosed)
+            if (isUserListed(user))
             {
-                MessageUtils.sendIssueMessage(id,"Reopened by:" + user.getNick());
-                SparkyForge.getGitbot().reopenIssue(id);
+                boolean isClosed = SparkyForge.getGitbot().isIssueClosed(id);
+                if (isClosed)
+                {
+                    MessageUtils.sendIssueMessage(id, "Reopened by: @" + getGitHubUserName(user));
+                    SparkyForge.getGitbot().reopenIssue(id);
+                    channel.sendMessage(user.getNick() + "re-opened issue");
+                } else
+                {
+                    channel.sendMessage(user.getNick() + ", Issue is already open");
+                }
+            } else {
+                channel.sendMessage(user.getNick() + ", You do not have permission to use this command!");
             }
-
         } catch (IOException e)
         {
             channel.sendMessage(user.getNick() + ": Error something something something");
+        } catch (NumberFormatException e)
+        {
+
         }
         return false;
     }

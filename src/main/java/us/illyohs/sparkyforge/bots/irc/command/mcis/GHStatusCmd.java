@@ -11,11 +11,11 @@ import com.google.gson.JsonObject;
 import org.kitteh.irc.client.library.element.Channel;
 import org.kitteh.irc.client.library.element.User;
 
-public class StatusCmd extends BaseCMD
+public class GHStatusCmd extends BaseCMD
 {
-    public StatusCmd()
+    public GHStatusCmd()
     {
-        super("status");
+        super("ghstatus");
     }
 
     @Override

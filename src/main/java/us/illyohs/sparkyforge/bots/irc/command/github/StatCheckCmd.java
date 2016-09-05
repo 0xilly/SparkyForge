@@ -29,22 +29,24 @@ public class StatCheckCmd extends BaseCMD
         try
         {
             int id = string2int(args[1]); //Integer.parseInt(idstring);
-            if (isVoice(channel, user) || isOp(channel, user))
+
+            boolean isPointedToDefault = SparkyForge.getGitbot().isPointedToDefualt(id);
+            String  title              = SparkyForge.getGitbot().getPullRequestTitle(id);
+            URL     url                = SparkyForge.getGitbot().getPullRequestURL(id);
+            if (isPointedToDefault)
             {
-                boolean isPointedToDefault  = SparkyForge.getGitbot().isPointedToDefualt(id);
-                String title                = SparkyForge.getGitbot().getPullRequestTitle(id);
-                URL url                     = SparkyForge.getGitbot().getPullRequestURL(id);
-                if (isPointedToDefault)
-                {
-                    channel.sendMessage(user.getNick() + ": Pull Request(" + title + ") is pointed to default " +
-                            Shorteners.gitIo(url));
-                }
-                else {
-                    channel.sendMessage(user.getNick() + ": Pull Request(" + title + ") is NOT pointed to default " +
-                            Shorteners.gitIo(url));
-                }
+                channel.sendMessage(user.getNick() + ": Pull Request(" + title + ") is pointed to default " +
+                        Shorteners.gitIo(url));
+            } else
+            {
+                channel.sendMessage(user.getNick() + ": Pull Request(" + title + ") is NOT pointed to default " +
+                        Shorteners.gitIo(url));
             }
+
         } catch (IOException e)
+        {
+            e.printStackTrace();
+        } catch (NumberFormatException e)
         {
 
         }

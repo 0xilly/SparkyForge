@@ -23,23 +23,37 @@ public class CloseCmd extends BaseCMD
         return "Closes a issue pr pull request. Usage: close <id>";
     }
 
-    //FIXME permchecking
     @Override
     public boolean execute(Channel channel, User user, String... args)
     {
+
         int id = string2int(args[1]); //Integer.parseInt(args[1]);
         try
         {
-            boolean isClosed = SparkyForge.getGitbot().isIssueClosed(id);
-            channel.sendMessage(String.valueOf(isClosed));
-            if (!isClosed)
+            if (isUserListed(user))
             {
-                MessageUtils.sendIssueMessage(id,"Closed by:" + user.getNick());
-                SparkyForge.getGitbot().closeIssue(id);
+                boolean isClosed = SparkyForge.getGitbot().isIssueClosed(id);
+                if (!isClosed)
+                {
+
+                    MessageUtils.sendIssueMessage(id, "Closed by: @" + getGitHubUserName(user));
+                    SparkyForge.getGitbot().closeIssue(id);
+                    channel.sendMessage(user.getNick() +", closed issue");
+
+                } else
+                {
+                    channel.sendMessage(user.getNick() + ", Issue is already closed");
+                }
+
+            } else {
+                channel.sendMessage(user.getNick() + ", You do not have permission to use this command!");
             }
         } catch (IOException e)
         {
-            channel.sendMessage(user.getNick() + ": Error something something something");
+            channel.sendMessage(user.getNick() + ", Error something something something");
+        } catch (NumberFormatException e)
+        {
+
         }
 
         return true;

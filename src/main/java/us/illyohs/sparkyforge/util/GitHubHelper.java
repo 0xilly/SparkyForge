@@ -124,8 +124,6 @@ public class GitHubHelper
     {
         List<String> labList = new ArrayList<>();
         this.getRepo().listLabels().forEach(l -> labList.add(l.getName()));
-//        String[] lbz = new String[0];
-//        lbz = labList.toArray(lbz);
 
         return labList.contains(label);
     }

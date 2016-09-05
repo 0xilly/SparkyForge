@@ -11,7 +11,7 @@ import us.illyohs.sparkyforge.bots.irc.command.github.LabelCmd;
 import us.illyohs.sparkyforge.bots.irc.command.github.ReopenCmd;
 import us.illyohs.sparkyforge.bots.irc.command.github.StatCheckCmd;
 import us.illyohs.sparkyforge.bots.irc.command.mcis.LatestCmd;
-import us.illyohs.sparkyforge.bots.irc.command.mcis.StatusCmd;
+import us.illyohs.sparkyforge.bots.irc.command.mcis.GHStatusCmd;
 import us.illyohs.sparkyforge.util.ConfigUtil;
 
 import org.kitteh.irc.client.library.event.channel.ChannelMessageEvent;
@@ -33,7 +33,7 @@ public class CommandHandler
 
     //Mcis
     private BaseCMD latest      = new LatestCmd();
-    private BaseCMD status      = new StatusCmd();
+    private BaseCMD status      = new GHStatusCmd();
 
     public CommandHandler()
     {

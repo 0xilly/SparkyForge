@@ -1,6 +1,7 @@
 package us.illyohs.sparkyforge.bots.irc.command;
 
 import javax.annotation.Nullable;
+import javax.jws.soap.SOAPBinding.Use;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Set;
@@ -77,9 +78,14 @@ public abstract class BaseCMD
         return Integer.parseInt(str);
     }
 
+    protected String getAccount(User user)
+    {
+        return user.getAccount().get();
+    }
+
     protected boolean doesUserHaveGitPerms(User user, Channel channe)
     {
-        String ircAcc = user.getUserString();
+        String ircAcc = user.getAccount().get();
         try
         {
             JsonParser parser = new JsonParser();
@@ -95,15 +101,42 @@ public abstract class BaseCMD
         return false;
     }
 
+    protected boolean isUserListed(User user) throws IOException
+    {
+        return WebUtils.readJsonObjectFromURL(ConfigUtil.getPermsURL()).has(user.getAccount().get());
+    }
+
     protected String getGitHubUserName(User user)
     {
-        String ircAcc = user.getName();
         try
         {
-            JsonParser parser = new JsonParser();
+            String ircAcc = user.getAccount().get();
             JsonObject jObj   = WebUtils.readJsonObjectFromURL(ConfigUtil.getPermsURL());
             if (jObj.has(ircAcc)) {
-                return jObj.get(ircAcc).getAsString();
+
+                JsonObject accObj   = jObj.get(ircAcc).getAsJsonObject();
+                String     ghLogin  = accObj.get("github").getAsString();
+                return ghLogin;
+            }
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    protected String getIrcUserName(User user)
+    {
+        try
+        {
+            String ircAcc = user.getAccount().get();
+            JsonObject jObj   = WebUtils.readJsonObjectFromURL(ConfigUtil.getPermsURL());
+            if (jObj.has(ircAcc)) {
+
+                JsonObject accObj   = jObj.get(ircAcc).getAsJsonObject();
+                String     ghLogin  = accObj.get("irc").getAsString();
+                return ghLogin;
             }
 
         } catch (IOException e)
@@ -114,8 +147,5 @@ public abstract class BaseCMD
     }
 
 
-    private String getAcc(User user)
-    {
-        return user.getAccount().get();
-    }
+
 }
