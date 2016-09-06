@@ -27,7 +27,10 @@ When adding the webhook URL to github select the `Let me select individual event
   - Jenkins support
   - Support for more GitHub [events](https://developer.github.com/webhooks/) and move to an event based
   - Move an Event based api instead of the hard coding it
+<<<<<<< HEAD
   - Force a status check from irc
+=======
+>>>>>>> 87bdd91768f07d74a574c3b69a060dadc28bf716
   - Some QOL irc features (may or may not happen)
     - Check the default branch from irc
     - Check the latest  version of forge from irc and the latest recommended build
