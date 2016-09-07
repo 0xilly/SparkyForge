@@ -23,6 +23,7 @@ import java.util.List;
 
 import us.illyohs.sparkyforge.hooker.hooks.github.GitHubHooker;
 import us.illyohs.sparkyforge.hooker.hooks.Hooker;
+import us.illyohs.sparkyforge.hooker.hooks.jenkins.JenkinsHooker;
 import us.illyohs.sparkyforge.util.ConfigUtil;
 
 import static spark.Spark.*;
@@ -32,13 +33,19 @@ public class HookLoader
 {
     private List<Hooker> hookList = new ArrayList<>();
 
+//    Hooker hooker = new JenkinsHooker();
+
     public HookLoader()
     {
         hookList.add(new GitHubHooker());
+        hookList.add(new JenkinsHooker());
     }
+
+
 
     public void loadHooks()
     {
+        System.out.println("hooks listening on server on port " +ConfigUtil.getWebHookPort());
         port(ConfigUtil.getWebHookPort());
         init();
 

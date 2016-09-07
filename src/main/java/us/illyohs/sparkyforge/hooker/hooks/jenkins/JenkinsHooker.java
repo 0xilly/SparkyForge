@@ -23,6 +23,7 @@ import java.io.IOException;
 import us.illyohs.sparkyforge.hooker.hooks.Hooker;
 
 import com.google.common.io.ByteStreams;
+
 import spark.Request;
 import spark.Response;
 
@@ -31,13 +32,17 @@ public class JenkinsHooker extends Hooker
     public JenkinsHooker()
     {
         super("jenkins");
+        System.out.println("jenkins hook loaded");
     }
 
     @Override
     public Object init(Request request, Response response) throws IOException
     {
+        String text = request.headers("text/html");
+
         byte[] payload = ByteStreams.toByteArray(request.raw().getInputStream());
         String json    = new String(payload);
-        return null;
+
+        return new JenkinsDispatcher(json);
     }
 }

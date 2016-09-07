@@ -26,12 +26,10 @@ import java.util.List;
 
 import us.illyohs.sparkyforge.SparkyForge;
 import us.illyohs.sparkyforge.bots.irc.command.BaseCMD;
-import us.illyohs.sparkyforge.util.GitHubHelper;
 
 import org.kitteh.irc.client.library.element.Channel;
 import org.kitteh.irc.client.library.element.User;
 import org.kohsuke.github.GHLabel;
-import org.kohsuke.github.PagedIterable;
 
 public class LabelCmd extends BaseCMD
 {

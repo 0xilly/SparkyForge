@@ -18,7 +18,6 @@
 
 package us.illyohs.sparkyforge.bots.irc.command.github;
 
-import javax.annotation.Nullable;
 import java.io.IOException;
 
 import us.illyohs.sparkyforge.SparkyForge;

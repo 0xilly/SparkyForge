@@ -53,7 +53,7 @@ public class ConfigUtil
                 props.setProperty("IRC.Nick", "Sparky");
                 props.setProperty("IRC.Password", "12345");
                 props.setProperty("IRC.Channel", "#channel");
-                props.setProperty("IRC.CommendOperator", "~");
+                props.setProperty("IRC.CommendOperator", ".");
 
                 props.setProperty("WebHook.Port", "2222");
                 out = Files.newOutputStream(conf);

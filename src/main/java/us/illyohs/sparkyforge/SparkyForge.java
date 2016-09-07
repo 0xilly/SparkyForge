@@ -33,6 +33,8 @@ public class SparkyForge
 
     public static void main(String... args)
     {
+        loader.loadHooks();
+
         ircbot = new IrcBot(
                 ConfigUtil.getIrcNetwork(),
                 ConfigUtil.getIrcPort(),
@@ -42,6 +44,7 @@ public class SparkyForge
         );
 
         ircbot.connect();
+
 
     }
 

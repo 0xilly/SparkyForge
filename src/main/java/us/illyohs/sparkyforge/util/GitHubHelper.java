@@ -25,8 +25,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-import us.illyohs.sparkyforge.SparkyForge;
-
 import org.kohsuke.github.GHIssue;
 import org.kohsuke.github.GHIssueComment;
 import org.kohsuke.github.GHIssueState;

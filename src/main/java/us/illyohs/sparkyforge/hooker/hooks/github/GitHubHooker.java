@@ -22,8 +22,8 @@ import java.io.IOException;
 
 import us.illyohs.sparkyforge.hooker.hooks.Hooker;
 
-
 import com.google.common.io.ByteStreams;
+
 import spark.Request;
 import spark.Response;
 
@@ -32,6 +32,7 @@ public class GitHubHooker extends Hooker
     public GitHubHooker()
     {
         super("github");
+        System.out.println("Github hook loaded");
     }
 
     @Override

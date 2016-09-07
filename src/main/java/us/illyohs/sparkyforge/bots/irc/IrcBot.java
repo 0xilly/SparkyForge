@@ -48,6 +48,7 @@ public class IrcBot
     {
         client.getEventManager().registerEventListener(new CommandHandler());
         client.addChannel(getChannel());
+        System.out.println("Connected");
     }
 
     public Client getClient()

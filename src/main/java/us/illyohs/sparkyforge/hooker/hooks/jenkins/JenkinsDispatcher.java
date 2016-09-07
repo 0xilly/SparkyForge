@@ -18,68 +18,63 @@
 
 package us.illyohs.sparkyforge.hooker.hooks.jenkins;
 
+import java.util.Objects;
+
 import us.illyohs.sparkyforge.util.MessageUtils;
 import us.illyohs.sparkyforge.util.WebUtils;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 public class JenkinsDispatcher
 {
     public JenkinsDispatcher(String json)
     {
+        System.out.println(json);
         JsonObject jObj   = WebUtils.readJsonObjectFromString(json);
         JsonObject build  = jObj.get("build").getAsJsonObject();
 
         String     name   = jObj.get("name").getAsString();
         int        number = build.get("number").getAsInt();
         String     phase  = build.get("phase").getAsString();
-        String     status = build.get("status").getAsString();
-        
-        buildHandler(name, number, phase, status);
+
+        buildHandler(name, number, phase, json);
     }
 
-    private void buildHandler(String name, int number, String phase, String status)
+    private void buildHandler(String name, int number, String phase, String json)
     {
         switch (phase)
         {
-            case "STARTED": handlerStarted(name, number, status);
+            case "STARTED": handleStarted(name, number);
                 break;
-            case "COMPLETED": handleCompleted(name, number, status);
+            case "FINALIZED": handleCompleted(name, number, json);
                 break;
             default:
                 break;
         }
     }
 
-    private void handlerStarted(String name, int number, String status)
+    private void handleStarted(String name, int number)
     {
+        MessageUtils.sendMessageToChannel("[Jenkins] Project: " + name + ", Build: #"+ number +" has started!");
     }
     
-    private void handleCompleted(String name, int number, String status)
+    private void handleCompleted(String name, int number, String json)
     {
-        if (status == "SUCCESS")
-        {
-            sendJenkinsMessage(name, number, status);
+        JsonObject jObj   = WebUtils.readJsonObjectFromString(json);
+        JsonObject build  = jObj.get("build").getAsJsonObject();
+        String     status = build.get("status").getAsString();
+
+
+        MessageUtils.sendMessageToChannel("[Jenkins] Project: " + name + ", Build: #" + number + ", Status: "+ status);
+
+        if (!Objects.equals(status, "SUCCESS")) {
+            MessageUtils.sendMessageToChannel("[Jenkins] Beep boop beep somethings wrong ");
+        } else {
             MessageUtils.sendMessageToChannel("Go to and grab the latest build from http://files.minecraftforge.net/");
-        } else if (status == "FAILURE")
-        {
-            sendJenkinsMessage(name, number, status);
-        } else if (status == "UNSTABLE")
-        {
-
-        } else if (status == "ABORTED")
-        {
-            MessageUtils.sendMessageToChannel("[Jenkins](project: " + name + ", Build: #"+ number +")");
-
-            sendJenkinsMessage(name, number, status);
         }
+
     }
 
-    private void sendJenkinsMessage(String name, int number, String status)
-    {
-        MessageUtils.sendMessageToChannel("[Jenkins] project: " + name + ", Build: #" + number + ", Status: "+ status);
-    }
 
 
 }

@@ -27,7 +27,7 @@ import us.illyohs.sparkyforge.util.Shorteners;
 import us.illyohs.sparkyforge.util.WebUtils;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+
 import org.kohsuke.github.GHPullRequest;
 import org.kohsuke.github.GHUser;
 
@@ -72,13 +72,13 @@ public class GitHubDispatcher
             String gitComment = "@" + user.getLogin() + " Your pull request is not pointed to the default branch __" +
                     defaultBranch + "__. Please retarget to __" + defaultBranch + "__. if you want this to be mered!";
 
-            String ircNonMerge = user.getName() + "(" + user.getLogin() + ") has just open pull request: "+ pr.getTitle()
-                    +", that is NOT pointed to the current default branch " + defaultBranch +
+            String ircNonMerge = "[GitHub] "+ user.getName() + "(" + user.getLogin() + ") has just open pull request: "+
+                    pr.getTitle() +", that is NOT pointed to the current default branch " + defaultBranch +
                     " and WON'T BE merged! " + Shorteners.gitIo(url);
 
-            String ircCanMerge = user.getName() + "(" + user.getLogin() + ") has just open pull request: "
-                    + pr.getTitle() + ", that is  pointed to the current default branch " + defaultBranch +
-                    " and CAN BE merged! " + Shorteners.gitIo(url);
+            String ircCanMerge ="[GitHub] "+ user.getName() + "(" + user.getLogin() + ") has just open pull request: "
+                    + pr.getTitle() + ", that is  pointed to the current default branch (" + defaultBranch +
+                    ") and CAN BE merged! " + Shorteners.gitIo(url);
 
 
             if (!isPointedToDefault)
