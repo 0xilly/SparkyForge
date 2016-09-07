@@ -33,7 +33,7 @@ public class ConfigUtil
 
     public ConfigUtil()
     {
-        loadProps();
+
     }
 
     private static void loadProps()
@@ -45,7 +45,7 @@ public class ConfigUtil
             {
                 System.out.println(conf.getFileName() + " Has not been found now creating a new one");
                 props.setProperty("GitHub.Token", "token");
-                props.setProperty("GitHub.Repository", "repo");
+                props.setProperty("GitHub.Repository", "<user/org>/repo");
                 props.setProperty("GitHub.PermsJsonUrl", "www.foo.com/Perms.json");
 
                 props.setProperty("IRC.Network", "irc.esper.net");
@@ -66,11 +66,13 @@ public class ConfigUtil
                 e.printStackTrace();
             }
             System.out.println("Please fill in sparky.properties with the correct information then restart!");
+            System.exit(1);
         }
     }
 
     private static String getPropFromKey(String key)
     {
+        loadProps();
         try
         {
             InputStream in = Files.newInputStream(conf);
