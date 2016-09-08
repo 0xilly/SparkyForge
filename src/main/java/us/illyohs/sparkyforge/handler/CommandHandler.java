@@ -25,7 +25,8 @@ import us.illyohs.sparkyforge.bots.irc.command.BaseCMD;
 import us.illyohs.sparkyforge.bots.irc.command.github.CloseCmd;
 import us.illyohs.sparkyforge.bots.irc.command.github.DefaultBranchCmd;
 import us.illyohs.sparkyforge.bots.irc.command.github.IsMergedCmd;
-import us.illyohs.sparkyforge.bots.irc.command.github.LabelCmd;
+import us.illyohs.sparkyforge.bots.irc.command.github.LabelPRCmd;
+import us.illyohs.sparkyforge.bots.irc.command.github.LabelissueCmd;
 import us.illyohs.sparkyforge.bots.irc.command.github.ListLabelsCmd;
 import us.illyohs.sparkyforge.bots.irc.command.github.ReopenCmd;
 import us.illyohs.sparkyforge.bots.irc.command.github.StatCheckCmd;
@@ -43,13 +44,14 @@ public class CommandHandler
     private String cmdOper  = ConfigUtil.getIrcCommendOperator();
 
     //GitHub
-    private BaseCMD label       = new LabelCmd();
-    private BaseCMD listlabels  = new ListLabelsCmd();
-    private BaseCMD ismerged    = new IsMergedCmd();
-    private BaseCMD defualt     = new DefaultBranchCmd();
-    private BaseCMD statCheck   = new StatCheckCmd();
-    private BaseCMD close       = new CloseCmd();
-    private BaseCMD reopen      = new ReopenCmd();
+    private BaseCMD labelpr    = new LabelPRCmd();
+    private BaseCMD lableissue = new LabelissueCmd();
+    private BaseCMD listlabels = new ListLabelsCmd();
+    private BaseCMD ismerged   = new IsMergedCmd();
+    private BaseCMD defualt    = new DefaultBranchCmd();
+    private BaseCMD statCheck  = new StatCheckCmd();
+    private BaseCMD close      = new CloseCmd();
+    private BaseCMD reopen     = new ReopenCmd();
 
     //Mcis
     private BaseCMD latest      = new LatestCmd();
@@ -57,7 +59,8 @@ public class CommandHandler
 
     public CommandHandler()
     {
-        cmdReg.put(label.getName(), label);
+        cmdReg.put(labelpr.getName(), labelpr);
+        cmdReg.put(lableissue.getName(), lableissue);
         cmdReg.put(listlabels.getName(), listlabels);
         cmdReg.put(ismerged.getName(), ismerged);
         cmdReg.put(defualt.getName(), defualt);

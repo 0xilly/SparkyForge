@@ -29,15 +29,15 @@ import us.illyohs.sparkyforge.bots.irc.command.BaseCMD;
 
 import org.kitteh.irc.client.library.element.Channel;
 import org.kitteh.irc.client.library.element.User;
-import org.kohsuke.github.GHLabel;
-import org.kohsuke.github.PagedIterable;
 
-public class LabelCmd extends BaseCMD
+import org.kohsuke.github.GHLabel;
+
+public class LabelPRCmd extends BaseCMD
 {
 
-    public LabelCmd()
+    public LabelPRCmd()
     {
-        super("label");
+        super("labelpr");
     }
 
     @Override
@@ -113,6 +113,7 @@ public class LabelCmd extends BaseCMD
 
         } catch (IOException e)
         {
+            channel.sendMessage("This is a pull request not an issue");
             e.printStackTrace();
         } catch (NumberFormatException e)
         {
