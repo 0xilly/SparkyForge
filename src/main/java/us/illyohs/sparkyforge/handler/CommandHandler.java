@@ -26,6 +26,7 @@ import us.illyohs.sparkyforge.bots.irc.command.github.CloseCmd;
 import us.illyohs.sparkyforge.bots.irc.command.github.DefaultBranchCmd;
 import us.illyohs.sparkyforge.bots.irc.command.github.IsMergedCmd;
 import us.illyohs.sparkyforge.bots.irc.command.github.LabelCmd;
+import us.illyohs.sparkyforge.bots.irc.command.github.ListLabelsCmd;
 import us.illyohs.sparkyforge.bots.irc.command.github.ReopenCmd;
 import us.illyohs.sparkyforge.bots.irc.command.github.StatCheckCmd;
 import us.illyohs.sparkyforge.bots.irc.command.mcis.LatestCmd;
@@ -43,6 +44,7 @@ public class CommandHandler
 
     //GitHub
     private BaseCMD label       = new LabelCmd();
+    private BaseCMD listlabels  = new ListLabelsCmd();
     private BaseCMD ismerged    = new IsMergedCmd();
     private BaseCMD defualt     = new DefaultBranchCmd();
     private BaseCMD statCheck   = new StatCheckCmd();
@@ -56,6 +58,7 @@ public class CommandHandler
     public CommandHandler()
     {
         cmdReg.put(label.getName(), label);
+        cmdReg.put(listlabels.getName(), listlabels);
         cmdReg.put(ismerged.getName(), ismerged);
         cmdReg.put(defualt.getName(), defualt);
         cmdReg.put(statCheck.getName(), statCheck);

@@ -55,10 +55,12 @@ public class StatCheckCmd extends BaseCMD
             {
                 channel.sendMessage(user.getNick() + ": Pull Request(" + title + ") is pointed to default " +
                         Shorteners.gitIo(url));
+                SparkyForge.getGitbot().setStatus(id, true);
             } else
             {
                 channel.sendMessage(user.getNick() + ": Pull Request(" + title + ") is NOT pointed to default " +
                         Shorteners.gitIo(url));
+                SparkyForge.getGitbot().setStatus(id, false);
             }
 
         } catch (IOException e)

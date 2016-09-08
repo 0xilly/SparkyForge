@@ -8,13 +8,14 @@ import java.util.Collection;
 import us.illyohs.sparkyforge.SparkyForge;
 
 import org.kohsuke.github.GHLabel;
+import org.kohsuke.github.PagedIterable;
 
 public class LabelTest
 {
     static ArrayList<String> ar = new ArrayList<>();
     public static void main(String... args) throws IOException
     {
-        Collection<GHLabel> labels = SparkyForge.getGitbot().getLabels(2);
+        PagedIterable<GHLabel> labels = SparkyForge.getGitbot().getRepo().listLabels();
 
         labels.forEach(lab -> ar.add(lab.getName()));
 

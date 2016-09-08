@@ -30,6 +30,7 @@ import us.illyohs.sparkyforge.bots.irc.command.BaseCMD;
 import org.kitteh.irc.client.library.element.Channel;
 import org.kitteh.irc.client.library.element.User;
 import org.kohsuke.github.GHLabel;
+import org.kohsuke.github.PagedIterable;
 
 public class LabelCmd extends BaseCMD
 {
@@ -42,7 +43,7 @@ public class LabelCmd extends BaseCMD
     @Override
     public String getHelp()
     {
-        return "ls";
+        return "Unease: label <repoid> <ls/rm/add>";
     }
 
     @Override
@@ -86,7 +87,7 @@ public class LabelCmd extends BaseCMD
                         SparkyForge.getGitbot().getPullRequest(id).setLabels(lbz);
                     } else
                     {
-                        channel.sendMessage(user.getNick() + " The label:" + args[3] + ", does not exist!");
+                        channel.sendMessage(user.getNick() + " The label: " + args[3] + ", does not exist!");
                     }
 
                 } else if (args[2].equals("rm"))
@@ -105,7 +106,8 @@ public class LabelCmd extends BaseCMD
                         channel.sendMessage(user.getNick() + ", The label: " + args[3] + ", does not exist!");
                     }
                 }
-            } else {
+            }else
+            {
                 channel.sendMessage(user.getNick() + ", You do not have permission to use this command!");
             }
 
