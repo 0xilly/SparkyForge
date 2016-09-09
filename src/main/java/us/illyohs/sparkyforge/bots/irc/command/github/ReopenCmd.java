@@ -53,7 +53,6 @@ public class ReopenCmd extends BaseCMD
                 {
                     MessageUtils.sendIssueMessage(id, "Reopened by: @" + getGitHubUserName(user));
                     SparkyForge.getGitbot().reopenIssue(id);
-                    channel.sendMessage(user.getNick() + "re-opened issue");
                 } else
                 {
                     channel.sendMessage(user.getNick() + ", Issue is already open");

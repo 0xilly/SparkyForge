@@ -58,7 +58,7 @@ public class ListLabelsCmd extends BaseCMD
                 channel.sendMessage(user.getNick() + ", " + Arrays.toString(ar.toArray()).replace("[","").replace("]",""));
 
             } else {
-                channel.sendMessage("You do not have permmision for the command");
+                channel.sendMessage("You do not have permission for the command");
             }
 
         } catch (IOException e) {

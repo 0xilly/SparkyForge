@@ -43,7 +43,7 @@ public class LabelPRCmd extends BaseCMD
     @Override
     public String getHelp()
     {
-        return "Usage: labelpr <id> <ls/rm/add>";
+        return "Usage: labelpr <id> <rm/add>";
     }
 
     @Override
@@ -60,20 +60,7 @@ public class LabelPRCmd extends BaseCMD
 
             if (isUserListed(user))
             {
-                if (args[2].equals("ls"))
-                {
-                    labels.forEach(lab -> ar.add(lab.getName()));
-
-                    String strLab = Arrays.toString(ar.toArray()).replace("[", "").replace("]", "");
-                    if (!ar.isEmpty())
-                    {
-                        channel.sendMessage(user.getNick() + ": The current labels are (" + strLab + ")");
-                    } else
-                    {
-                        channel.sendMessage(user.getNick() + ": There are no labels for this issue/pr");
-                    }
-
-                } else if (args[2].equals("add"))
+                if (args[2].equals("add"))
                 {
                     labels.forEach(lab -> ar.add(lab.getName()));
 

@@ -107,7 +107,7 @@ public class GitHubDispatcher
             String        title = pr.getTitle();
             URL           url   = pr.getHtmlUrl();
 
-            String message = "Pull Request: " + title + ", has been reopened! " + Shorteners.gitIo(url);
+            String message = "[GitHub] Pull Request: (" + title + "), has been reopened! " + Shorteners.gitIo(url);
             MessageUtils.sendLexHandledMessageToChannel(message);
         } catch (IOException e)
         {
@@ -136,7 +136,7 @@ public class GitHubDispatcher
             GHPullRequest pr    = SparkyForge.getGitbot().getPullRequest(id);
             String        title = pr.getTitle();
             URL           url   = pr.getHtmlUrl();
-            MessageUtils.sendLexHandledMessageToChannel("Pull Request: " + title + ", has been Closed! " + Shorteners.gitIo(url));
+            MessageUtils.sendLexHandledMessageToChannel("[GitHub] Pull Request: (" + title + "), has been Closed! " + Shorteners.gitIo(url));
 
         } catch (IOException e)
         {

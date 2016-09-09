@@ -51,7 +51,7 @@ public class ConfigUtil
                 props.setProperty("IRC.Network", "irc.esper.net");
                 props.setProperty("IRC.Port", "6666");
                 props.setProperty("IRC.Nick", "Sparky");
-                props.setProperty("IRC.Password", "12345");
+                props.setProperty("IRC.NickPassword", "12345");
                 props.setProperty("IRC.Channel", "#channel");
                 props.setProperty("IRC.CommendOperator", ".");
 
@@ -106,7 +106,7 @@ public class ConfigUtil
 
     public static String getIrcPass()
     {
-        return getPropFromKey("IRC.Password");
+        return getPropFromKey("IRC.NickPassword");
     }
 
     public static String getIrcChannel()

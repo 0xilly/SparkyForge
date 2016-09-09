@@ -49,10 +49,8 @@ public class IsMergedCmd extends BaseCMD
         try
         {
             if (SparkyForge.getGitbot().isMerged(id)) {
-                System.out.println("The pr is merged");
                 channel.sendMessage(user.getNick() + ": PR is merged");
             } else {
-                System.out.println("The pr is not merged");
                 channel.sendMessage(user.getNick() + ": The Pr is not merged");
             }
         } catch (IOException e) {
