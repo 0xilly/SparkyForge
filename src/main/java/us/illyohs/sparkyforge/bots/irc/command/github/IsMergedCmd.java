@@ -36,7 +36,7 @@ public class IsMergedCmd extends BaseCMD
     @Override
     public String getHelp()
     {
-        return "usage <PR id>";
+        return "Usage <PR id>";
     }
 
 

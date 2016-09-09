@@ -37,7 +37,7 @@ public class CloseCmd extends BaseCMD
     @Override
     public String getHelp()
     {
-        return "Closes a issue pr pull request. Usage: close <id>";
+        return "Usage: close <id>";
     }
 
     @Override

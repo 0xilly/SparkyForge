@@ -99,6 +99,13 @@ public class CommandHandler
                 event.getChannel().sendMessage("error with arg");
             }
         }
+
+        if (message.startsWith(".commands"))
+        {
+            for (BaseCMD cmd : cmdReg.values()) {
+                event.getActor().sendNotice(cmd.getName() + ": " + cmd.getHelp());
+            }
+        }
         return false;
     }
 }

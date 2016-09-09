@@ -39,7 +39,7 @@ public class LatestCmd extends BaseCMD
     @Override
     public String getHelp()
     {
-        return "Gets the latest version of forge";
+        return "Usage: latest";
     }
 
     @Override

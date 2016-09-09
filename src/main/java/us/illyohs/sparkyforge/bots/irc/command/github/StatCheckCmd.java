@@ -38,7 +38,7 @@ public class StatCheckCmd extends BaseCMD
     @Override
     public String getHelp()
     {
-        return "Usage: Forces the bot to do a status check";
+        return "Usage: prstatus <id>";
     }
 
     @Override

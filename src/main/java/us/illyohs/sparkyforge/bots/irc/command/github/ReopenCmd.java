@@ -37,7 +37,7 @@ public class ReopenCmd extends BaseCMD
     @Override
     public String getHelp()
     {
-        return "Reopens a Issue/PR, Usage: reopen <id>";
+        return "Usage: reopen <id>";
     }
 
     @Override

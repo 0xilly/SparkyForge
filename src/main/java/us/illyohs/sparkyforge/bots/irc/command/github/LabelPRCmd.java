@@ -43,7 +43,7 @@ public class LabelPRCmd extends BaseCMD
     @Override
     public String getHelp()
     {
-        return "Unease: label <repoid> <ls/rm/add>";
+        return "Usage: labelpr <id> <ls/rm/add>";
     }
 
     @Override
@@ -117,7 +117,7 @@ public class LabelPRCmd extends BaseCMD
             e.printStackTrace();
         } catch (NumberFormatException e)
         {
-
+            channel.sendMessage("error with args");
         }
 
         return true;

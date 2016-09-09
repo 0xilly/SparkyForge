@@ -39,7 +39,7 @@ public class GHStatusCmd extends BaseCMD
     @Override
     public String getHelp()
     {
-        return null;
+        return "Usage: ghstatus";
     }
 
     @Override

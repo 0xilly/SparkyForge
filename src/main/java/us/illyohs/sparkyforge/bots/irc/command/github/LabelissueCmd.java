@@ -42,7 +42,7 @@ public class LabelissueCmd extends BaseCMD
     @Override
     public String getHelp()
     {
-        return "Unease: label <repoid> <ls/rm/add>";
+        return "Usage: labelissue <id> <ls/rm/add>";
     }
 
     @Override
@@ -113,10 +113,10 @@ public class LabelissueCmd extends BaseCMD
         } catch (IOException e)
         {
             channel.sendMessage("This is an issue not an pull request");
-            e.printStackTrace();
+
         } catch (NumberFormatException e)
         {
-
+            channel.sendMessage("error with args");
         }
 
         return true;

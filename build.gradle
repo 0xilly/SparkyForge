@@ -1,5 +1,5 @@
 group 'us.illyohs.sparkyforge'
-version '1.0.2'
+version '1.0.4'
 
 apply plugin: 'java'
 
