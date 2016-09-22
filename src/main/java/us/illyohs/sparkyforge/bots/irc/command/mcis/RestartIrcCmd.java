@@ -26,73 +26,38 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package us.illyohs.sparkyforge.util;
+package us.illyohs.sparkyforge.bots.irc.command.mcis;
 
+import javax.annotation.Nullable;
 import java.io.IOException;
 
 import us.illyohs.sparkyforge.SparkyForge;
+import us.illyohs.sparkyforge.bots.irc.command.BaseCMD;
 
+import org.kitteh.irc.client.library.element.Channel;
 import org.kitteh.irc.client.library.element.User;
 
-public class MessageUtils
+public class RestartIrcCmd extends BaseCMD
 {
-    /**
-     * We don't want to ping lex
-     * @param message
-     * @return
-     */
-    private static String lexHelper(String message)
+    public RestartIrcCmd(String name)
     {
-        if (message.contains("LexManos")) {
-            return message.replace("LexManos", "Lex");
+        super(name);
+    }
+
+    @Override
+    public String getHelp()
+    {
+        return null;
+    }
+
+    @Override
+    public boolean execute(Channel channel, User user, @Nullable String... args) throws IOException, ArrayIndexOutOfBoundsException
+    {
+        if (isOp(channel, user)) {
+            SparkyForge.getIrcbot().restartIrcBot();
         } else {
-            return message;
+            channel.sendMessage(user.getNick() + ", You don't have permission to use that command!");
         }
+        return false;
     }
-
-    /**
-     *
-     * @param message
-     */
-    public static void sendLexHandledMessageToChannel(String message)
-    {
-        sendMessageToChannel(lexHelper(message));
-    }
-
-    public static void sendMessageToChannel(String message)
-    {
-        SparkyForge.getIrcbot().getConChannel().sendMessage(message);
-    }
-
-    /**
-     *
-     * @param user
-     * @param message
-     */
-    public static void sendMessageToUser(User user, String message)
-    {
-        user.sendMessage(message);
-    }
-
-    public static void sendIssueMessage(int id, String comment)
-    {
-        try
-        {
-            SparkyForge.getGitbot().getIssue(id).comment(comment);
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-//    public static void sendIssueMessage(int id, String comment)
-//    {
-//        try
-//        {
-//            SparkyForge.getGitbot().getIssue(id).comment(comment);
-//        } catch (IOException e)
-//        {
-//            e.printStackTrace();
-//        }
-//    }
 }
