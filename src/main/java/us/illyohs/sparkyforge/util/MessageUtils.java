@@ -85,6 +85,11 @@ public class MessageUtils
         }
     }
 
+    public static void postMessageTwitterMessage(String message)
+    {
+        SparkyForge.getTwitBot().postTweet(message);
+    }
+
 //    public static void sendIssueMessage(int id, String comment)
 //    {
 //        try

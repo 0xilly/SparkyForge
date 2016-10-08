@@ -1,11 +1,11 @@
 group 'us.illyohs.sparkyforge'
-version '1.0.5'
+version '1.1.0'
 
 apply plugin: 'java'
 
 sourceCompatibility = 1.8
 
-Jar(type: Jar) {
+task fatjar(type: Jar) {
     manifest {
         attributes 'Implementation-Title': 'SparkyForge',
                 'Implementation-Version': version,
@@ -29,4 +29,6 @@ dependencies {
     compile 'com.google.guava:guava:19.0'
     compile 'com.github.kevinsawicki:http-request:6.0'
     compile 'org.kohsuke:github-api:1.77'//GitHub Api
+    compile 'org.twitter4j:twitter4j-core:4.0.3'
+
 }

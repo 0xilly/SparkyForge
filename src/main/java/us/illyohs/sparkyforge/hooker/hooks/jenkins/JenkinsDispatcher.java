@@ -30,6 +30,7 @@ package us.illyohs.sparkyforge.hooker.hooks.jenkins;
 
 import java.util.Objects;
 
+import us.illyohs.sparkyforge.util.ConfigUtil;
 import us.illyohs.sparkyforge.util.MessageUtils;
 import us.illyohs.sparkyforge.util.WebUtils;
 
@@ -81,6 +82,12 @@ public class JenkinsDispatcher
             MessageUtils.sendMessageToChannel("[Jenkins] Beep boop beep somethings wrong ");
         } else {
             MessageUtils.sendMessageToChannel("Go to and grab the latest build from http://files.minecraftforge.net/");
+
+            if (ConfigUtil.isTwitterBotEnabled()) {
+
+                MessageUtils.postMessageTwitterMessage("Forge build #" + build + " has been built!\n" +
+                        "Go grab it from http://files.minecraftforge.net/");
+            }
         }
 
     }

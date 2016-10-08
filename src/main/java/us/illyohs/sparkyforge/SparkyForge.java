@@ -29,6 +29,7 @@
 package us.illyohs.sparkyforge;
 
 import us.illyohs.sparkyforge.bots.irc.IrcBot;
+import us.illyohs.sparkyforge.bots.twitter.TwitBot;
 import us.illyohs.sparkyforge.hooker.HookLoader;
 import us.illyohs.sparkyforge.util.ConfigUtil;
 import us.illyohs.sparkyforge.util.GitHubHelper;
@@ -37,7 +38,8 @@ public class SparkyForge
 {
     private static GitHubHelper gitbot;
     private static IrcBot       ircbot;
-    private static HookLoader loader = new HookLoader();
+    private static TwitBot      twitBot;
+    private static HookLoader   loader = new HookLoader();
 
 
 
@@ -55,6 +57,14 @@ public class SparkyForge
 
         ircbot.connect();
 
+        if (ConfigUtil.isTwitterBotEnabled()) {
+            twitBot = new TwitBot(
+                    ConfigUtil.getTwitConsumerSecret(),
+                    ConfigUtil.getTwitConsumerKey(),
+                    ConfigUtil.getTwitAccToken(),
+                    ConfigUtil.getTwitAccTokenSecret()
+            );
+        }
 
     }
 
@@ -66,5 +76,10 @@ public class SparkyForge
     public static GitHubHelper getGitbot()
     {
         return new GitHubHelper(ConfigUtil.getGHToken(), ConfigUtil.getGHRepo());
+    }
+
+    public static TwitBot getTwitBot()
+    {
+        return twitBot;
     }
 }

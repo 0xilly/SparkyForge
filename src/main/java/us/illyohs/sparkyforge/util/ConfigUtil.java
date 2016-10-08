@@ -58,12 +58,20 @@ public class ConfigUtil
                 props.setProperty("GitHub.Repository", "<user/org>/repo");
                 props.setProperty("GitHub.PermsJsonUrl", "www.foo.com/Perms.json");
 
+
                 props.setProperty("IRC.Network", "irc.esper.net");
                 props.setProperty("IRC.Port", "6666");
                 props.setProperty("IRC.Nick", "Sparky");
                 props.setProperty("IRC.NickPassword", "12345");
                 props.setProperty("IRC.Channel", "#channel");
                 props.setProperty("IRC.CommendOperator", ".");
+
+                props.setProperty("Twitter.IsBotEnabled", "false");
+
+                props.setProperty("Twitter.ConsumerSecret", "secret");
+                props.setProperty("Twitter.ConsumerKey", "key");
+                props.setProperty("Twitter.AccToken", "token");
+                props.setProperty("Twitter.AccTokenSecret", "AccSecret");
 
                 props.setProperty("WebHook.Port", "2222");
                 out = Files.newOutputStream(conf);
@@ -142,6 +150,32 @@ public class ConfigUtil
     public static int getWebHookPort()
     {
         return Integer.parseInt(getPropFromKey("WebHook.Port"));
+    }
+
+    public static boolean isTwitterBotEnabled()
+    {
+        return Boolean.parseBoolean(getPropFromKey("Twitter.IsBotEnabled"));
+    }
+
+    public static String getTwitConsumerSecret()
+    {
+        return getPropFromKey("Twitter.ConsumerSecret");
+    }
+
+
+    public static String getTwitConsumerKey()
+    {
+        return getPropFromKey("Twitter.ConsumerKey");
+    }
+
+    public static String getTwitAccToken()
+    {
+        return getPropFromKey("Twitter.AccToken");
+    }
+
+    public static String getTwitAccTokenSecret()
+    {
+        return getPropFromKey("Twitter.AccTokenSecret");
     }
 
 }
